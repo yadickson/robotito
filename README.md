@@ -7,18 +7,14 @@ autoreconf -i
 ```
 
 ```
-aclocal
-```
-```
-autoconf
-```
-automake --add-missing
-```
-
-```
 ./configure
 ```
 
 ```
 make
 ```
+
+```
+./robotito
+```
+
