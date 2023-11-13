@@ -139,10 +139,19 @@ install-sh
 missing
 
 .deps/
+.libs/
+
 Makefile
 config.status
 
 *.o
+*.in
+*.out
 
 robotito
+libtool
+
 config.h*
+config.guess
+config.sub
+ltmain.sh
