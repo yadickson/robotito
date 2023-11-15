@@ -155,3 +155,8 @@ config.h*
 config.guess
 config.sub
 ltmain.sh
+
+
+.cproject
+.project
+.settings/

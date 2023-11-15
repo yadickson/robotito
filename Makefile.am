@@ -1,9 +1,4 @@
 AUTOMAKE_OPTIONS = foreign
 AM_CFLAGS=$(DEPENDENCIES_CFLAGS)
 
-bin_PROGRAMS = robotito
-
-robotito_SOURCES = main.cpp
-robotito_LDADD=$(DEPENDENCIES_LIBS)
-
-
+SUBDIRS = src test
