@@ -3,7 +3,7 @@
 Un jueguito para aprender a mover un robot en un tablero
 
 ```
-autoreconf -i
+autoreconf -ivf
 ```
 
 ```
@@ -15,6 +15,6 @@ make
 ```
 
 ```
-./robotito
+./src/robotito
 ```
 

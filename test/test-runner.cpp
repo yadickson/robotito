@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
 	compileroutputter.write ();
 
 	std::ofstream xmlFileOut("xunit.xml");
-	CppUnit::XmlOutputter xmlOut(&collectedresults, xmlFileOut);
+	CPPUNIT_NS::XmlOutputter xmlOut(&collectedresults, xmlFileOut);
 	xmlOut.write();
 
 	return collectedresults.wasSuccessful() ? 0 : 1;

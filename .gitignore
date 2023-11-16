@@ -168,3 +168,8 @@ coverage/
 *.gcda
 *.gcno
 reports/
+robotito-*/
+*.tgz
+*.tar
+*.gz
+*.zip
