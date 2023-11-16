@@ -5,7 +5,11 @@ AM_INIT_AUTOMAKE([gnu])
 AC_LANG(C++)
 AC_PROG_CXX
 
-AM_EXTRA_RECURSIVE_TARGETS([test, coverage])
+AM_EXTRA_RECURSIVE_TARGETS([
+	test
+	coverage
+	format
+])
 
 AC_CONFIG_FILES([
 	Makefile
@@ -20,6 +24,7 @@ PKG_CHECK_EXISTS([cppunit], [], [AC_MSG_ERROR("can't find cppunit")])
 
 AC_CHECK_PROGS([LCOV], [lcov], [AC_MSG_ERROR("can't find lcov")])
 AC_CHECK_PROGS([GENHTML], [genhtml], [AC_MSG_ERROR("can't find genhtml")])
+# AC_CHECK_PROGS([FORMAT], [clang-format], [AC_MSG_ERROR("can't find clang-format")])
 
 PKG_CHECK_MODULES([DEPENDENCIES], [ncursesw])
 PKG_CHECK_MODULES([TEST_DEPENDENCIES], [cppunit])

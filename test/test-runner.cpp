@@ -1,33 +1,39 @@
+#include <cppunit/BriefTestProgressListener.h>
+#include <cppunit/CompilerOutputter.h>
 #include <cppunit/TestCase.h>
 #include <cppunit/TestFixture.h>
-#include <cppunit/ui/text/TextTestRunner.h>
-#include <cppunit/extensions/HelperMacros.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/TestResult.h>
 #include <cppunit/TestResultCollector.h>
 #include <cppunit/TestRunner.h>
-#include <cppunit/BriefTestProgressListener.h>
-#include <cppunit/CompilerOutputter.h>
 #include <cppunit/XmlOutputter.h>
+#include <cppunit/extensions/HelperMacros.h>
+#include <cppunit/extensions/TestFactoryRegistry.h>
+#include <cppunit/ui/text/TextTestRunner.h>
 
-int main(int argc, char* argv[])
+using namespace CPPUNIT_NS;
+using namespace std;
+
+int
+main (int argc, char *argv[])
 {
-	CPPUNIT_NS::TestResult testresult;
-	CPPUNIT_NS::TestResultCollector collectedresults;
-	CPPUNIT_NS::BriefTestProgressListener progress;
-	CPPUNIT_NS::TestRunner testrunner;
+  TestResult testresult;
+  TestResultCollector collectedresults;
+  BriefTestProgressListener progress;
+  TestRunner testrunner;
 
-	testresult.addListener (&collectedresults);
-	testresult.addListener (&progress);
-	testrunner.addTest (CPPUNIT_NS::TestFactoryRegistry::getRegistry().makeTest ());
-	testrunner.run(testresult);
+  Test *test = TestFactoryRegistry::getRegistry ().makeTest ();
 
-	CPPUNIT_NS::CompilerOutputter compileroutputter(&collectedresults, std::cerr);
-	compileroutputter.write ();
+  testresult.addListener (&collectedresults);
+  testresult.addListener (&progress);
+  testrunner.addTest (test);
+  testrunner.run (testresult);
 
-	std::ofstream xmlFileOut("xunit.xml");
-	CPPUNIT_NS::XmlOutputter xmlOut(&collectedresults, xmlFileOut);
-	xmlOut.write();
+  CompilerOutputter compileroutputter (&collectedresults, cerr);
+  compileroutputter.write ();
 
-	return collectedresults.wasSuccessful() ? 0 : 1;
+  ofstream xmlFileOut ("xunit.xml");
+  XmlOutputter xmlOut (&collectedresults, xmlFileOut);
+  xmlOut.write ();
+
+  return collectedresults.wasSuccessful () ? 0 : 1;
 }

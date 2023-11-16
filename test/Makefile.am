@@ -5,6 +5,10 @@ noinst_PROGRAMS = robotito_test
 robotito_test_SOURCES = test-runner.cpp position-test.cpp $(top_srcdir)/src/position.cpp
 robotito_test_LDADD=$(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_LIBS)
 
+format-local:
+	@echo "format test files"
+	clang-format --sort-includes --style=GNU -i $(top_srcdir)/test/*.*pp
+
 clean-local:
 	$(RM) *.gcno
 	$(RM) *.gcda
@@ -16,9 +20,7 @@ test-local: robotito_test
 
 coverage-local: test-local
 	lcov --directory . --capture --output-file lcov.info --include '*/src/*'
-
-genhtml-local:
 	genhtml --demangle-cpp -t robotito -o ../reports/coverage lcov.info
 
 
-check-local: coverage-local genhtml-local
+check-local: coverage-local

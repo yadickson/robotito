@@ -2,16 +2,17 @@
 
 #include "position.hpp"
 
-class Robot {
+class Robot
+{
 private:
-    Position *position;
+  Position *position;
 
 public:
-    Robot(int x, int y);
-    Robot(Position *position);
-    Position *getPosition();
-    void moveLeft();
-    void moveRight();
-    void moveUp();
-    void moveDown();
+  Robot (int x, int y);
+  Robot (Position *position);
+  Position *getPosition ();
+  void moveLeft ();
+  void moveRight ();
+  void moveUp ();
+  void moveDown ();
 };
