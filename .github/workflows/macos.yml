@@ -16,6 +16,7 @@ jobs:
     - name: install dependencies
       run: |
         brew update
+        bre install autoconf
         brew install cppunit
         brew install lcov
     - name: autoreconf
