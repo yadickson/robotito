@@ -1,6 +1,6 @@
 AC_INIT([robotito], [0.0.1], [yadickson@gmail.com])
 
-AM_INIT_AUTOMAKE([gnu subdir-objects])
+AM_INIT_AUTOMAKE([gnu])
 
 AC_LANG(C++)
 AC_PROG_CXX
