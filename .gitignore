@@ -149,6 +149,7 @@ config.status
 *.out
 
 robotito
+robotito_test
 libtool
 
 config.h*
