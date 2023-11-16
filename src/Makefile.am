@@ -1,4 +1,5 @@
-bin_PROGRAMS = robotito
+AM_CXXFLAGS=$(DEPENDENCIES_CFLAGS)
 
-robotito_SOURCES = main.cpp
+bin_PROGRAMS = robotito
+robotito_SOURCES = main.cpp position.cpp
 robotito_LDADD=$(DEPENDENCIES_LIBS)

@@ -160,3 +160,10 @@ ltmain.sh
 .cproject
 .project
 .settings/
+
+*.xml
+*.info
+coverage/
+*.gcda
+*.gcno
+reports/
