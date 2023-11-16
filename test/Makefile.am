@@ -15,7 +15,7 @@ test-local: robotito_test
 	./robotito_test
 
 coverage-local: test-local
-	lcov --directory . --capture --output-file lcov.info --include '*/src/*' --ignore-errors unused
+	lcov --directory . --capture --output-file lcov.info --include '*/src/*'
 	genhtml --demangle-cpp -t robotito -o ../reports/coverage lcov.info
 
 
