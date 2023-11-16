@@ -1,11 +1,11 @@
 AC_INIT([robotito], [0.0.1], [yadickson@gmail.com])
 
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([gnu subdir-objects])
 
 AC_LANG(C++)
 AC_PROG_CXX
 
-AM_EXTRA_RECURSIVE_TARGETS([test])
+AM_EXTRA_RECURSIVE_TARGETS([test, coverage])
 
 AC_CONFIG_FILES([
 	Makefile

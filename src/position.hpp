@@ -7,6 +7,7 @@ private:
 
 public:
     Position(int x, int y);
+    ~Position();
     int getX();
     int getY();
 };

@@ -11,9 +11,12 @@ clean-local:
 	$(RM) *.info
 	$(RM) *.xml
 
-check-local: test-local
-
 test-local: robotito_test
 	./robotito_test
+
+coverage-local: test-local
 	lcov --directory . --capture --output-file lcov.info --include '*/src/*'
 	genhtml --demangle-cpp -t robotito -o ../reports/coverage lcov.info
+
+
+check-local: coverage-local
