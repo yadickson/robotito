@@ -8,11 +8,12 @@ private:
   Position *position;
 
 public:
-  Robot (int x, int y);
-  Robot (Position *position);
+  explicit Robot (Position *position);
+  Robot *operator= (const Robot *robot);
+  ~Robot ();
   Position *getPosition ();
-  void moveLeft ();
-  void moveRight ();
-  void moveUp ();
-  void moveDown ();
+  void moveToLeft ();
+  void moveToRight ();
+  void moveToUp ();
+  void moveToDown ();
 };

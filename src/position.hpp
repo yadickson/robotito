@@ -7,8 +7,11 @@ private:
   int y;
 
 public:
-  Position (int x, int y);
+  explicit Position (const int x, const int y);
+  void operator= (const Position &position);
   ~Position ();
   int getX ();
   int getY ();
+  void setX (const int x);
+  void setY (const int y);
 };

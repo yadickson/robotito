@@ -18,8 +18,9 @@ jobs:
         brew update
         brew install autoconf
         brew install automake
-        brew install cppunit
+        brew install cpputest
         brew install lcov
+        brew install cppcheck
     - name: autoreconf
       run: autoreconf -ivf
     - name: configure
