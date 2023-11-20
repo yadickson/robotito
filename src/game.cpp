@@ -43,16 +43,20 @@ Game::execute ()
       switch (key)
         {
         case 261:
-          this->robot->moveToLeft ();
+          if (this->table->canMoveToLeft (*robot))
+            this->robot->moveToLeft ();
           break;
         case 260:
-          this->robot->moveToRight ();
+          if (this->table->canMoveToRight (*robot))
+            this->robot->moveToRight ();
           break;
         case 259:
-          this->robot->moveToUp ();
+          if (this->table->canMoveToUp (*robot))
+            this->robot->moveToUp ();
           break;
         case 258:
-          this->robot->moveToDown ();
+          if (this->table->canMoveToDown (*robot))
+            this->robot->moveToDown ();
           break;
         }
     }

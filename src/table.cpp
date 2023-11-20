@@ -32,14 +32,26 @@ Table::getHeight () const
   return this->height;
 }
 
-void
-Table::setWidth (const int width)
+bool
+Table::canMoveToLeft (const Robot &robot) const
 {
-  this->width = width;
+  return robot.getPosition ()->getX () < this->width - 4;
 }
 
-void
-Table::setHeight (const int height)
+bool
+Table::canMoveToRight (const Robot &robot) const
 {
-  this->height = height;
+  return robot.getPosition ()->getX () > 1;
+}
+
+bool
+Table::canMoveToUp (const Robot &robot) const
+{
+  return robot.getPosition ()->getY () > 1;
+}
+
+bool
+Table::canMoveToDown (const Robot &robot) const
+{
+  return robot.getPosition ()->getY () < this->height - 2;
 }
