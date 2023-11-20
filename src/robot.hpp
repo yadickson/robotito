@@ -11,7 +11,7 @@ private:
 
 public:
   explicit Robot (Position *position, const char *image);
-  explicit Robot (Robot &robot);
+  explicit Robot (const Robot &robot);
   virtual ~Robot ();
   void operator= (const Robot &robot);
   virtual Position *getPosition () const;

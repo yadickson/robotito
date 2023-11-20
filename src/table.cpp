@@ -16,6 +16,8 @@ Table::~Table () {}
 void
 Table::operator= (const Table &table)
 {
+  this->width = table.getWidth ();
+  this->height = table.getHeight ();
 }
 
 int

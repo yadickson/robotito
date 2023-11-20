@@ -7,17 +7,17 @@ Robot::Robot (Position *position, const char *image)
   this->image.assign (image);
 }
 
-Robot::Robot (Robot &robot)
+Robot::Robot (const Robot &robot)
 {
-  this->position = robot.position;
-  this->image = robot.image;
+  this->position = robot.getPosition ();
+  this->image = robot.getImage ();
 }
 
 void
 Robot::operator= (const Robot &robot)
 {
-  this->position = robot.position;
-  this->image = robot.image;
+  this->position = robot.getPosition ();
+  this->image = robot.getImage ();
 }
 
 Robot::~Robot () {}
