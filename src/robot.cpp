@@ -1,17 +1,20 @@
 #include "robot.hpp"
+#include "position.hpp"
 
 Robot::Robot (Position *position) { this->position = position; }
-Robot *
-Robot::operator= (const Robot *robot)
+
+Robot::Robot (const Robot &robot) { this->position = robot.position; }
+
+void
+Robot::operator= (const Robot &robot)
 {
-  this->position = robot->position;
-  return this;
+  this->position = robot.position;
 }
 
-Robot::~Robot () { delete position; }
+Robot::~Robot () {}
 
 Position *
-Robot::getPosition ()
+Robot::getPosition () const
 {
   return this->position;
 }
@@ -26,14 +29,20 @@ Robot::moveToLeft ()
 void
 Robot::moveToRight ()
 {
+  const int x = position->getX ();
+  this->position->setX (x - 1);
 }
 
 void
 Robot::moveToUp ()
 {
+  const int y = position->getY ();
+  this->position->setY (y - 1);
 }
 
 void
 Robot::moveToDown ()
 {
+  const int y = position->getY ();
+  this->position->setY (y + 1);
 }

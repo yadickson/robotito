@@ -1,24 +1,30 @@
 #include "position.hpp"
 
+Position::Position (const Position &position)
+{
+  this->x = position.getX ();
+  this->y = position.getY ();
+}
+
 Position::Position (const int x, const int y) : x (x), y (y) {}
 
 void
 Position::operator= (const Position &position)
 {
-  this->x = position.x;
-  this->y = position.y;
+  this->x = position.getX ();
+  this->y = position.getY ();
 }
 
 Position::~Position () {}
 
 int
-Position::getX ()
+Position::getX () const
 {
   return this->x;
 }
 
 int
-Position::getY ()
+Position::getY () const
 {
   return this->y;
 }

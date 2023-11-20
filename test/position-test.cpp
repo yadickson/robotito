@@ -11,21 +11,33 @@ public:
   Position *position;
 
 protected:
-  void setup ()
+  TEST_SETUP ()
   {
     xFaker = rand () % 100;
     yFaker = 200 + rand () % 100;
     position = new Position (xFaker, yFaker);
   }
 
-  void teardown () { delete position; }
+  TEST_TEARDOWN () { delete position; }
+};
+
+TEST (Position, should_check_copy_constructor)
+{
+  Position copyPosition (*position);
+
+  CHECK_EQUAL (xFaker, copyPosition.getX ());
+  CHECK_EQUAL (yFaker, copyPosition.getY ());
 };
 
 TEST (Position, should_check_equal_operator)
 {
-  Position copyPosition = *position;
+  Position copyPosition (0, 0);
 
-  CHECK (&copyPosition != position);
+  CHECK_EQUAL (0, copyPosition.getX ());
+  CHECK_EQUAL (0, copyPosition.getY ());
+
+  copyPosition = *position;
+
   CHECK_EQUAL (xFaker, copyPosition.getX ());
   CHECK_EQUAL (yFaker, copyPosition.getY ());
 };

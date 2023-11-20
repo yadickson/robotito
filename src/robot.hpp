@@ -9,11 +9,12 @@ private:
 
 public:
   explicit Robot (Position *position);
-  Robot *operator= (const Robot *robot);
-  ~Robot ();
-  Position *getPosition ();
-  void moveToLeft ();
-  void moveToRight ();
-  void moveToUp ();
-  void moveToDown ();
+  explicit Robot (const Robot &robot);
+  virtual ~Robot ();
+  void operator= (const Robot &robot);
+  virtual Position *getPosition () const;
+  virtual void moveToLeft ();
+  virtual void moveToRight ();
+  virtual void moveToUp ();
+  virtual void moveToDown ();
 };
