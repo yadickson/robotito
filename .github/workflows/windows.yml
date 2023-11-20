@@ -10,8 +10,14 @@ jobs:
   build:
 
     runs-on: windows-latest
+    env:
+      SHELLOPTS: igncr
+    defaults:
+      run:
+        shell: C:\tools\cygwin\bin\bash.exe --login '{0}'
 
     steps:
+    - uses: actions/checkout@v3
     - uses: egor-tensin/setup-cygwin@v4
       with:
         packages: autoreconf automake gcc-g++
@@ -21,4 +27,3 @@ jobs:
         ./configure
         make check
         make distcheck
-      shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}' 
