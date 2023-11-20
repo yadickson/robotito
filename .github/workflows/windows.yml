@@ -1,0 +1,24 @@
+name: C/C++ CI Windows
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: egor-tensin/setup-cygwin@v4
+      with:
+        packages: autoreconf automake gcc-g++
+    - name: build
+      run: |
+        autoreconf -ivf
+        ./configure
+        make check
+        make distcheck
+      shell: C:\tools\cygwin\bin\bash.exe --login --norc -eo pipefail -o igncr '{0}' 
