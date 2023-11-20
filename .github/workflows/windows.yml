@@ -17,12 +17,15 @@ jobs:
         shell: C:\tools\cygwin\bin\bash.exe --login '{0}'
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: egor-tensin/setup-cygwin@v4
+    - name: checkout
+      uses: actions/checkout@v3
+    - name: config cygwin
+      uses: egor-tensin/setup-cygwin@v4
       with:
         packages: autoreconf automake gcc-g++
     - name: build
       run: |
+        ls -lsa
         autoreconf -ivf
         ./configure
         make check
