@@ -36,11 +36,11 @@ jobs:
           mingw64-${{ matrix.pkgarch }}-gcc-g++
 
     - name: Build Cygwin
-      run: |
-        export PATH=/usr/bin:$(cygpath ${SYSTEMROOT})/system32
-        autoreconf -ivf
-        ./configure
-        make
-        make check
+      run: >-
+        export PATH=/usr/bin:$(cygpath ${SYSTEMROOT})/system32 &&
+        autoreconf -ivf &&
+        ./configure &&
+        make &&
+        make check &&
         make distcheck
       shell: C:\cygwin\bin\bash.exe --noprofile --norc -eo pipefail '{0}'
