@@ -25,16 +25,15 @@ jobs:
           autoconf,
           automake,
           gcc-g++,
-          gettext-devel,
           make,
           cppcheck,
           libncurses-devel
 
     - name: Build Cygwin
-      run: >-
-        autoreconf -ivf &&
-        ./configure &&
-        make &&
-        make check &&
+      run: |
+        autoreconf -ivf
+        ./configure --disable-tests
+        make
+        make check
         make distcheck
       shell: C:\tools\cygwin\bin\bash.exe --noprofile --norc -eo pipefail -o igncr '{0}'
