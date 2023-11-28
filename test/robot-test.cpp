@@ -1,31 +1,48 @@
-#include <CppUTest/TestHarness.h>
-
 #include "position-mock.hpp"
 #include "robot.hpp"
 
-TEST_GROUP (Robot)
+MACRO_TEST_CLASS (Robot)
 {
 
 public:
   Position *positionMock;
   Robot *robot;
 
-protected:
-  TEST_SETUP ()
+  MACRO_TEST_SETUP ()
   {
     positionMock = new PositionMock ();
     robot = new Robot (positionMock);
   }
 
-  TEST_TEARDOWN ()
+  MACRO_TEST_TEARDOWN ()
   {
     delete positionMock;
     delete robot;
-    mock ().clear ();
+    MACRO_TEST_CLEAR_MOCK ();
   }
+
+  MACRO_TEST_SUITE_START (Robot);
+  MACRO_TEST_SUITE_TEST (should_check_position_mock_move_to_left);
+  MACRO_TEST_SUITE_TEST (should_check_position_mock_move_to_right);
+  MACRO_TEST_SUITE_TEST (should_check_position_mock_move_to_up);
+  MACRO_TEST_SUITE_TEST (should_check_position_mock_move_to_down);
+  MACRO_TEST_SUITE_TEST (should_check_position);
+  MACRO_TEST_SUITE_TEST (should_check_copy_robot_constructor);
+  MACRO_TEST_SUITE_TEST (should_check_copy_robot_operator_equeal);
+  MACRO_TEST_SUITE_END ();
+
+  MACRO_TEST_METHOD (should_check_position_mock_move_to_left);
+  MACRO_TEST_METHOD (should_check_position_mock_move_to_right);
+  MACRO_TEST_METHOD (should_check_position_mock_move_to_up);
+  MACRO_TEST_METHOD (should_check_position_mock_move_to_down);
+  MACRO_TEST_METHOD (should_check_position);
+  MACRO_TEST_METHOD (should_check_copy_robot_constructor);
+  MACRO_TEST_METHOD (should_check_copy_robot_operator_equeal);
 };
 
-TEST (Robot, should_check_position_mock_move_to_left)
+MACRO_TEST_REGISTRATION (Robot);
+
+MACRO_TEST (Robot, should_check_position_mock_move_to_left)
 {
   const int xFaker = rand () % 100;
   const int expected = xFaker + 1;
@@ -45,7 +62,7 @@ TEST (Robot, should_check_position_mock_move_to_left)
   mock ().checkExpectations ();
 };
 
-TEST (Robot, should_check_position_mock_move_to_right)
+MACRO_TEST (Robot, should_check_position_mock_move_to_right)
 {
   const int xFaker = rand () % 100;
   const int expected = xFaker - 1;
@@ -65,7 +82,7 @@ TEST (Robot, should_check_position_mock_move_to_right)
   mock ().checkExpectations ();
 };
 
-TEST (Robot, should_check_position_mock_move_to_up)
+MACRO_TEST (Robot, should_check_position_mock_move_to_up)
 {
   const int yFaker = rand () % 100;
   const int expected = yFaker - 1;
@@ -85,7 +102,7 @@ TEST (Robot, should_check_position_mock_move_to_up)
   mock ().checkExpectations ();
 };
 
-TEST (Robot, should_check_position_mock_move_to_down)
+MACRO_TEST (Robot, should_check_position_mock_move_to_down)
 {
   const int yFaker = rand () % 100;
   const int expected = yFaker + 1;
@@ -105,27 +122,28 @@ TEST (Robot, should_check_position_mock_move_to_down)
   mock ().checkExpectations ();
 };
 
-TEST (Robot, should_check_position)
+MACRO_TEST (Robot, should_check_position)
 {
   const Position *response = robot->getPosition ();
-  CHECK_EQUAL (positionMock, response);
+  MACRO_CHECK_EQUAL (positionMock, response);
 };
 
-TEST (Robot, should_check_copy_robot_constructor)
+MACRO_TEST (Robot, should_check_copy_robot_constructor)
 {
   Robot copyRobot (*robot);
 
-  CHECK_EQUAL (positionMock, copyRobot.getPosition ());
+  MACRO_CHECK_EQUAL (positionMock, copyRobot.getPosition ());
 };
 
-TEST (Robot, should_check_copy_robot_operator_equeal)
+MACRO_TEST (Robot, should_check_copy_robot_operator_equeal)
 {
   Position position (0, 0);
   Robot copyRobot (&position);
 
-  CHECK_EQUAL (&position, copyRobot.getPosition ());
+  MACRO_CHECK_EQUAL (&position, copyRobot.getPosition ());
 
   copyRobot = *robot;
 
-  CHECK_EQUAL (positionMock, copyRobot.getPosition ());
+  MACRO_CHECK_EQUAL (positionMock, copyRobot.getPosition ());
 };
+

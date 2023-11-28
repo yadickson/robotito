@@ -174,3 +174,4 @@ robotito-*/
 *.gz
 *.zip
 src/.dirstamp
+stamp*

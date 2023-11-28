@@ -1,7 +1,6 @@
 #pragma once
 
-#include <CppUTestExt/MockSupport.h>
-
+#include "macros-test.hpp"
 #include "position.hpp"
 
 #define POSITION_MOCK_GET_X_FUNCTION "getX"
