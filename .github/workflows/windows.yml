@@ -32,7 +32,7 @@ jobs:
     - name: Build Cygwin
       run: >-
         autoreconf -ivf &&
-        ./configure --disable-cpputest --disable-coverage &&
+        ./configure --disable-tests --disable-coverage &&
         make &&
         make check &&
         make distcheck
