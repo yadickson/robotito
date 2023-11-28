@@ -32,6 +32,7 @@ jobs:
           autoconf,
           automake,
           gcc-g++,
+          gettext-devel,
           make,
           mingw64-${{ matrix.pkgarch }}-gcc-g++
 
