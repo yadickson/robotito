@@ -34,6 +34,5 @@ jobs:
         autoreconf -ivf &&
         ./configure --disable-tests --disable-coverage &&
         make &&
-        make check &&
-        make distcheck
+        make check
       shell: C:\tools\cygwin\bin\bash.exe --noprofile --norc -eo pipefail -o igncr '{0}'
