@@ -29,10 +29,8 @@ AS_VAR_IF([CPPCHECK], [cppcheck], [], [AC_MSG_ERROR([cppcheck is required])])
 
 PKG_CHECK_MODULES([DEPENDENCIES], [ncursesw])
       
-AC_MSG_CHECKING([Checking if tests should be enabled])
-AC_ARG_ENABLE([tests],[AS_HELP_STRING([--disable-tests], [Disable tests])], [])
-
-test "x$enable_tests" = xno || enable_tests=yes
+AC_MSG_CHECKING([tests enabled])
+AC_ARG_ENABLE([tests],[AS_HELP_STRING([--disable-tests], [Disable tests])], [enable_tests=no], [enable_tests=yes])
 AC_MSG_RESULT($enable_tests)
 
 AM_CONDITIONAL(RUN_TESTS, [test "x$enable_tests" = xyes])
