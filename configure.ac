@@ -41,5 +41,6 @@ AC_CHECK_HEADER([ncurses.h])
 AC_CHECK_HEADER([clocale])
 AC_CHECK_HEADER([iostream])
 AC_CHECK_HEADER([cstdlib])
-                  
+AC_CHECK_HEADER([cstddef])
+
 AC_OUTPUT

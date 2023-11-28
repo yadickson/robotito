@@ -1,47 +1,27 @@
 #include "table.hpp"
 
-Table::Table (const Table &table)
-{
-  this->width = table.getWidth ();
-  this->height = table.getHeight ();
-}
+Table::Table (Display *display) { this->display = display; }
 
-Table::Table (const int width, const int height)
-    : width (width), height (height)
-{
-}
+Table::Table (const Table &table) { this->display = table.display; }
 
 Table::~Table () {}
 
 void
 Table::operator= (const Table &table)
 {
-  this->width = table.getWidth ();
-  this->height = table.getHeight ();
-}
-
-int
-Table::getWidth () const
-{
-  return this->width;
-}
-
-int
-Table::getHeight () const
-{
-  return this->height;
+  this->display = table.display;
 }
 
 bool
 Table::canMoveToLeft (const Robot &robot) const
 {
-  return robot.getPosition ()->getX () < this->width - 4;
+  return robot.getPosition ()->getX () < this->display->getWidth () - 3;
 }
 
 bool
 Table::canMoveToRight (const Robot &robot) const
 {
-  return robot.getPosition ()->getX () > 1;
+  return robot.getPosition ()->getX () > 2;
 }
 
 bool
@@ -53,5 +33,5 @@ Table::canMoveToUp (const Robot &robot) const
 bool
 Table::canMoveToDown (const Robot &robot) const
 {
-  return robot.getPosition ()->getY () < this->height - 2;
+  return robot.getPosition ()->getY () < this->display->getHeight () - 2;
 }

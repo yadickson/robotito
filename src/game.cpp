@@ -2,9 +2,9 @@
 
 #include "game.hpp"
 
-Game::Game (WINDOW *window, Keyboard *keyboard, Table *table, Robot *robot)
+Game::Game (Display *display, Keyboard *keyboard, Table *table, Robot *robot)
 {
-  this->window = window;
+  this->display = display;
   this->keyboard = keyboard;
   this->table = table;
   this->robot = robot;
@@ -12,7 +12,7 @@ Game::Game (WINDOW *window, Keyboard *keyboard, Table *table, Robot *robot)
 
 Game::Game (const Game &game)
 {
-  this->window = game.window;
+  this->display = game.display;
   this->keyboard = game.keyboard;
   this->table = game.table;
   this->robot = game.robot;
@@ -23,20 +23,20 @@ Game::~Game () {}
 void
 Game::execute ()
 {
-  box (window, 0, 0);
+  display->initialize ();
 
   do
     {
 
-      mvwaddstr (window, robot->getPosition ()->getY (),
-                 robot->getPosition ()->getX (), robot->getImage ());
+      mvwaddch (display->getWindow (), robot->getPosition ()->getY (),
+                robot->getPosition ()->getX (), '*');
 
-      wrefresh (window);
+      wrefresh (display->getWindow ());
 
       keyboard->execute ();
 
-      mvwaddstr (window, robot->getPosition ()->getY (),
-                 robot->getPosition ()->getX (), " ");
+      mvwaddch (display->getWindow (), robot->getPosition ()->getY (),
+                robot->getPosition ()->getX (), ' ');
 
       const int key = keyboard->getKey ();
 

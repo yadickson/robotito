@@ -1,0 +1,46 @@
+name: C/C++ CI Linux Fedora with CYGWIN
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - target: x86_64-pc-cygwin
+          pkgarch: 64
+        - target: i686-pc-cygwin
+          pkgarch: 32
+    name: Fedora cross ${{ matrix.target }}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: install dependencies
+      run: dnf install -y autoconf automake make mingw${{ matrix.pkgarch }}-gcc-c++
+
+    - name: enable 'dnf copr'
+      run: dnf install -y dnf-plugins-core
+
+    - name: install cross-cygwin toolchain and libs from copr
+      run: |
+        dnf copr enable -y yselkowitz/cygwin
+        dnf install -y cygwin${{ matrix.pkgarch }}-gcc-c++
+
+    - name: autoreconf
+      run: autoreconf -ivf
+    - name: configure
+      run: ./configure --target=${{ matrix.target }}
+    - name: make
+      run: make
+    - name: make check
+      run: make check
+    - name: make distcheck
+      run: make distcheck

@@ -1,23 +1,14 @@
 #include "robot.hpp"
 #include "position.hpp"
 
-Robot::Robot (Position *position, const char *image)
-{
-  this->position = position;
-  this->image.assign (image);
-}
+Robot::Robot (Position *position) { this->position = position; }
 
-Robot::Robot (const Robot &robot)
-{
-  this->position = robot.getPosition ();
-  this->image = robot.getImage ();
-}
+Robot::Robot (const Robot &robot) { this->position = robot.getPosition (); }
 
 void
 Robot::operator= (const Robot &robot)
 {
   this->position = robot.getPosition ();
-  this->image = robot.getImage ();
 }
 
 Robot::~Robot () {}
@@ -26,12 +17,6 @@ Position *
 Robot::getPosition () const
 {
   return this->position;
-}
-
-const char *
-Robot::getImage () const
-{
-  return this->image.c_str ();
 }
 
 void

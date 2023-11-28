@@ -1,20 +1,20 @@
 #pragma once
 
+#include <ncurses.h>
+
+#include "display.hpp"
 #include "robot.hpp"
 
 class Table
 {
 private:
-  int width;
-  int height;
+  Display *display;
 
 public:
+  explicit Table (Display *display);
   explicit Table (const Table &table);
-  explicit Table (const int width, const int height);
   virtual ~Table ();
   void operator= (const Table &table);
-  virtual int getWidth () const;
-  virtual int getHeight () const;
 
   virtual bool canMoveToLeft (const Robot &robot) const;
   virtual bool canMoveToRight (const Robot &robot) const;

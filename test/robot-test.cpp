@@ -14,7 +14,7 @@ protected:
   TEST_SETUP ()
   {
     positionMock = new PositionMock ();
-    robot = new Robot (positionMock, "image");
+    robot = new Robot (positionMock);
   }
 
   TEST_TEARDOWN ()
@@ -111,30 +111,21 @@ TEST (Robot, should_check_position)
   CHECK_EQUAL (positionMock, response);
 };
 
-TEST (Robot, should_check_iamge)
-{
-  const char *response = robot->getImage ();
-  STRCMP_EQUAL ("image", response);
-};
-
 TEST (Robot, should_check_copy_robot_constructor)
 {
   Robot copyRobot (*robot);
 
   CHECK_EQUAL (positionMock, copyRobot.getPosition ());
-  STRCMP_EQUAL ("image", copyRobot.getImage ());
 };
 
 TEST (Robot, should_check_copy_robot_operator_equeal)
 {
   Position position (0, 0);
-  Robot copyRobot (&position, "other-image");
+  Robot copyRobot (&position);
 
   CHECK_EQUAL (&position, copyRobot.getPosition ());
-  STRCMP_EQUAL ("other-image", copyRobot.getImage ());
 
   copyRobot = *robot;
 
   CHECK_EQUAL (positionMock, copyRobot.getPosition ());
-  STRCMP_EQUAL ("image", copyRobot.getImage ());
 };
