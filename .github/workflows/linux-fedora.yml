@@ -32,7 +32,7 @@ jobs:
     - name: install cross-cygwin toolchain and libs from copr
       run: |
         dnf copr enable -y yselkowitz/cygwin
-        dnf install -y cygwin${{ matrix.pkgarch }}-gcc-c++
+        dnf install -y cygwin${{ matrix.pkgarch }}-gcc-c++ cygwin${{ matrix.pkgarch }}-gettext
 
     - name: autoreconf
       run: autoreconf -ivf

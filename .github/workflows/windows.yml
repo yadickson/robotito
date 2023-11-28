@@ -39,7 +39,7 @@ jobs:
       run: |
         export PATH=/usr/bin:$(cygpath ${SYSTEMROOT})/system32
         autoreconf -ivf
-        ./configure --prefix=$(realpath $(pwd)/../install) -v &&
+        ./configure
         make
         make check
         make distcheck
