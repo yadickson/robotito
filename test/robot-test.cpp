@@ -126,4 +126,3 @@ MACRO_TEST (Robot, should_check_copy_robot_operator_equeal)
 
   MACRO_CHECK_EQUAL (positionMock, copyRobot.getPosition ());
 };
-
