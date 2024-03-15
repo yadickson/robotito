@@ -20,25 +20,7 @@ public:
     delete position;
     MACRO_TEST_CLEAR_MOCK ();
   }
-
-  MACRO_TEST_SUITE_START (Position);
-  MACRO_TEST_SUITE_TEST (should_check_copy_constructor);
-  MACRO_TEST_SUITE_TEST (should_check_equal_operator);
-  MACRO_TEST_SUITE_TEST (should_check_position_x);
-  MACRO_TEST_SUITE_TEST (should_check_position_y);
-  MACRO_TEST_SUITE_TEST (should_check_position_x_updated);
-  MACRO_TEST_SUITE_TEST (should_check_position_y_updated);
-  MACRO_TEST_SUITE_END ();
-
-  MACRO_TEST_METHOD (should_check_copy_constructor);
-  MACRO_TEST_METHOD (should_check_equal_operator);
-  MACRO_TEST_METHOD (should_check_position_x);
-  MACRO_TEST_METHOD (should_check_position_y);
-  MACRO_TEST_METHOD (should_check_position_x_updated);
-  MACRO_TEST_METHOD (should_check_position_y_updated);
 };
-
-MACRO_TEST_REGISTRATION (Position);
 
 MACRO_TEST (Position, should_check_copy_constructor)
 {

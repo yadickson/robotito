@@ -20,27 +20,7 @@ public:
     delete robot;
     MACRO_TEST_CLEAR_MOCK ();
   }
-
-  MACRO_TEST_SUITE_START (Robot);
-  MACRO_TEST_SUITE_TEST (should_check_position_mock_move_to_left);
-  MACRO_TEST_SUITE_TEST (should_check_position_mock_move_to_right);
-  MACRO_TEST_SUITE_TEST (should_check_position_mock_move_to_up);
-  MACRO_TEST_SUITE_TEST (should_check_position_mock_move_to_down);
-  MACRO_TEST_SUITE_TEST (should_check_position);
-  MACRO_TEST_SUITE_TEST (should_check_copy_robot_constructor);
-  MACRO_TEST_SUITE_TEST (should_check_copy_robot_operator_equeal);
-  MACRO_TEST_SUITE_END ();
-
-  MACRO_TEST_METHOD (should_check_position_mock_move_to_left);
-  MACRO_TEST_METHOD (should_check_position_mock_move_to_right);
-  MACRO_TEST_METHOD (should_check_position_mock_move_to_up);
-  MACRO_TEST_METHOD (should_check_position_mock_move_to_down);
-  MACRO_TEST_METHOD (should_check_position);
-  MACRO_TEST_METHOD (should_check_copy_robot_constructor);
-  MACRO_TEST_METHOD (should_check_copy_robot_operator_equeal);
 };
-
-MACRO_TEST_REGISTRATION (Robot);
 
 MACRO_TEST (Robot, should_check_position_mock_move_to_left)
 {
