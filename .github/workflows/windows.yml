@@ -1,4 +1,4 @@
-5c6t7jhdjgname: C/C++ CI Windows
+name: C/C++ CI Windows
 
 on: [push, pull_request]
 
