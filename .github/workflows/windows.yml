@@ -1,38 +1,40 @@
-name: C/C++ CI Windows with CYGWIN
+name: C/C++ CI Windows
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push, pull_request]
 
 jobs:
+
   build:
     runs-on: windows-latest
-    name: Windows native
+    defaults:
+      run:
+        shell: msys2 {0}
 
     steps:
-    # checkout action uses the native git (we can avoid this messing up line
-    # endings, but this could still be dangerous e.g if we need symlinks in the
-    # repo)
-    - run: git config --global core.autocrlf input
-    - uses: actions/checkout@v3
-
-    - name: Install Cygwin
-      uses: egor-tensin/setup-cygwin@v4
-      with:
-        packages: >-
-          autoconf,
-          automake,
-          gcc-g++,
-          make,
-          cppcheck,
-          libncurses-devel
-
-    - name: Build Cygwin
-      run: >-
-        autoreconf -ivf &&
-        ./configure --disable-tests --disable-coverage &&
-        make &&
-        make check
-      shell: C:\tools\cygwin\bin\bash.exe --noprofile --norc -eo pipefail -o igncr '{0}'
+      - name: config msys2
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          install: git
+          pacboy: >-
+            autotools:p
+            gcc:p
+            make:p
+            lcov:p
+            ncurses
+            cpputest:p
+            cppcheck:p
+      - name: config git
+        run: git config --global core.autocrlf input
+      - name: checkout source code
+        uses: actions/checkout@v4
+      - name: autoreconf
+        run: autoreconf -ivf
+      - name: configure
+        run: ./configure
+      - name: make
+        run: make
+      - name: make check
+        run: make check
+      - name: make distcheck
+        run: make distcheck
