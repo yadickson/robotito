@@ -1,7 +1,7 @@
 #include <ctype.h>
 #include <ncurses.h>
 
-#import "keyboard.hpp"
+#include "keyboard.hpp"
 
 Keyboard::Keyboard () { this->key = 0; }
 

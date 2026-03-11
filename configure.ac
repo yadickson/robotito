@@ -1,7 +1,7 @@
 AC_PREREQ(2.57)
 AC_INIT([robotito], [0.0.1], [yadickson@gmail.com])
 
-AM_INIT_AUTOMAKE([gnu])
+AM_INIT_AUTOMAKE([gnu foreign subdir-objects])
 
 AC_LANG(C++)
 AC_PROG_CXX

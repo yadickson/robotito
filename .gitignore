@@ -175,3 +175,8 @@ robotito-*/
 *.zip
 src/.dirstamp
 stamp*
+
+configure~
+*~
+.dirstamp
+*.gcov
