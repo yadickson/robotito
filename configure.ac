@@ -1,5 +1,6 @@
 AC_PREREQ(2.57)
 AC_INIT([robotito], [0.0.1], [yadickson@gmail.com])
+AC_CANONICAL_HOST
 
 AM_INIT_AUTOMAKE([gnu foreign subdir-objects])
 
@@ -62,5 +63,11 @@ AC_CHECK_HEADER([cstddef])
 
 AM_CONDITIONAL(RUN_TESTS, [test "x$enable_tests" = xyes])
 AM_CONDITIONAL(RUN_COVERAGE, [test "x$enable_coverage" = xyes])
+
+AS_CASE([$host_os],
+  [*mingw*], [
+    OS_CXXFLAGS = -fno-builtin
+  ]
+)
 
 AC_OUTPUT
