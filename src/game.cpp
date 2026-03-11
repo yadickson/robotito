@@ -28,7 +28,7 @@ Game::execute ()
   robot->getPosition ()->setX (COLS / 2);
   robot->getPosition ()->setY (LINES / 2);
 
-  const char * emoji = "\U0001F916";
+  const char *emoji = "\U0001F916";
 
   do
     {
