@@ -24,23 +24,32 @@ void
 Game::execute ()
 {
   display->initialize ();
-  robot->getPosition ()->setY (LINES / 2);
+
   robot->getPosition ()->setX (COLS / 2);
+  robot->getPosition ()->setY (LINES / 2);
 
   wchar_t emoji[] = L"\U0001F916";
 
   do
     {
 
-      mvwaddwstr (display->getWindow (), robot->getPosition ()->getY (),
-                  robot->getPosition ()->getX (), emoji);
+      int x = robot->getPosition ()->getX () < COLS - 3
+                  ? robot->getPosition ()->getX ()
+                  : COLS - 3;
+      int y = robot->getPosition ()->getY () < LINES - 2
+                  ? robot->getPosition ()->getY ()
+                  : LINES - 2;
+
+      robot->getPosition ()->setX (x);
+      robot->getPosition ()->setY (y);
+
+      mvwaddwstr (display->getWindow (), y, x, emoji);
 
       wrefresh (display->getWindow ());
 
       keyboard->execute ();
 
-      mvwaddch (display->getWindow (), robot->getPosition ()->getY (),
-                robot->getPosition ()->getX (), ' ');
+      mvwaddch (display->getWindow (), y, x, ' ');
 
       const int key = keyboard->getKey ();
 

@@ -25,7 +25,7 @@ public:
 MACRO_TEST (Robot, should_check_position_mock_move_to_left)
 {
   const int xFaker = rand () % 100;
-  const int expected = xFaker + 1;
+  const int expected = xFaker - 1;
 
   mock ()
       .expectOneCall (POSITION_MOCK_GET_X_FUNCTION)
@@ -45,7 +45,7 @@ MACRO_TEST (Robot, should_check_position_mock_move_to_left)
 MACRO_TEST (Robot, should_check_position_mock_move_to_right)
 {
   const int xFaker = rand () % 100;
-  const int expected = xFaker - 1;
+  const int expected = xFaker + 1;
 
   mock ()
       .expectOneCall (POSITION_MOCK_GET_X_FUNCTION)
