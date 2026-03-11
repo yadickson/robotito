@@ -14,7 +14,6 @@ jobs:
       - name: config msys2
         uses: msys2/setup-msys2@v2
         with:
-          msystem: mingw64
           update: true
           install: git
           pacboy: >-
@@ -22,7 +21,7 @@ jobs:
             gcc:p
             make:p
             lcov:p
-            ncurses
+            ncurses:p
             cpputest:p
             cppcheck:p
       - name: config git
