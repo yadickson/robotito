@@ -4,6 +4,7 @@ bin_PROGRAMS = robotito
 robotito_SOURCES = main.cpp position.cpp robot.cpp keyboard.cpp game.cpp table.cpp display.cpp
 robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) -std=c++11 -Wall
 robotito_LDADD = $(DEPENDENCIES_LIBS)
+robotito_LDFLAGS = -Wl,-Bdynamic
 
 SOURSES=$(EXTRA_DIST) $(robotito_SOURCES)
 

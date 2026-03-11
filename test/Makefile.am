@@ -21,6 +21,7 @@ noinst_PROGRAMS = robotito_test
 robotito_test_SOURCES = $(SOURCE_FILES) $(TEST_FILES)
 robotito_test_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) -std=c++11 -Wall -g -O0 -fprofile-arcs -ftest-coverage --coverage -I$(top_srcdir)/src
 robotito_test_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
+robotito_test_LDFLAGS = -Wl,-Bdynamic
 
 test-local: robotito_test
 	./robotito_test -c -v -ojunit
