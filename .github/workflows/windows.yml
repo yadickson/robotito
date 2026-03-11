@@ -18,6 +18,9 @@ jobs:
           install: git
           pacboy: >-
             autotools:p
+            libtool:p
+            pkg-config:p
+            clang:p
             gcc:p
             make:p
             lcov:p

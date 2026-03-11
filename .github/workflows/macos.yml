@@ -16,6 +16,9 @@ jobs:
         run: |
           brew install autoconf
           brew install automake
+          brew instal libtool
+          brew install pkg-config
+          brew install clang-format
           brew install cpputest
           brew install lcov
           brew install cppcheck

@@ -28,11 +28,7 @@ Game::execute ()
   robot->getPosition ()->setX (COLS / 2);
   robot->getPosition ()->setY (LINES / 2);
 
-#ifdef _DARWIN_C_SOURCE
-  const char *emoji = L"\U0001F916";
-#else
   wchar_t emoji[] = L"\U0001F916";
-#endif
 
   do
     {
@@ -47,8 +43,11 @@ Game::execute ()
       robot->getPosition ()->setX (x);
       robot->getPosition ()->setY (y);
 
+#ifdef _DARWIN_C_SOURCE
+      mvwaddstr (display->getWindow (), y, x, emoji);
+#else
       mvwaddwstr (display->getWindow (), y, x, emoji);
-
+#endif
       wrefresh (display->getWindow ());
 
       keyboard->execute ();
