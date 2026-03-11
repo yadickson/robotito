@@ -17,7 +17,6 @@ AM_EXTRA_RECURSIVE_TARGETS([
 	coverage
 	format
 	cppcheck
-	memcheck
 ])
 
 AC_CONFIG_FILES([
