@@ -10,7 +10,7 @@
 #include "table.hpp"
 
 int
-main (int argc, char *argv[])
+main ()
 {
   setlocale (LC_ALL, "");
 
