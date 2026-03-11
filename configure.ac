@@ -1,4 +1,4 @@
-AC_PREREQ(2.57)
+AC_PREREQ([2.68])
 AC_INIT([robotito], [0.0.1], [yadickson@gmail.com])
 AC_CANONICAL_HOST
 
@@ -6,6 +6,9 @@ AM_INIT_AUTOMAKE([gnu foreign subdir-objects])
 
 AC_LANG(C++)
 AC_PROG_CXX
+
+AX_CXX_COMPILE_STDCXX_11
+
 AC_PROG_INSTALL
 AC_CONFIG_HEADERS([config.h])
 
