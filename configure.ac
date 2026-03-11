@@ -55,7 +55,6 @@ if test "x$enable_tests" = xyes; then
 	fi
 fi
 
-AC_CHECK_HEADER([ncurses.h])
 AC_CHECK_HEADER([clocale])
 AC_CHECK_HEADER([iostream])
 AC_CHECK_HEADER([cstdlib])
