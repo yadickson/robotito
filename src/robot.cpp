@@ -23,14 +23,14 @@ void
 Robot::moveToLeft ()
 {
   const int x = position->getX ();
-  this->position->setX (x + 1);
+  this->position->setX (x - 1);
 }
 
 void
 Robot::moveToRight ()
 {
   const int x = position->getX ();
-  this->position->setX (x - 1);
+  this->position->setX (x + 1);
 }
 
 void

@@ -24,12 +24,16 @@ void
 Game::execute ()
 {
   display->initialize ();
+  robot->getPosition ()->setY (LINES / 2);
+  robot->getPosition ()->setX (COLS / 2);
+
+  wchar_t emoji[] = L"\U0001F916";
 
   do
     {
 
-      mvwaddch (display->getWindow (), robot->getPosition ()->getY (),
-                robot->getPosition ()->getX (), '*');
+      mvwaddwstr (display->getWindow (), robot->getPosition ()->getY (),
+                  robot->getPosition ()->getX (), emoji);
 
       wrefresh (display->getWindow ());
 
@@ -42,11 +46,14 @@ Game::execute ()
 
       switch (key)
         {
-        case 261:
+        case KEY_RESIZE:
+          display->reload ();
+          break;
+        case 260:
           if (this->table->canMoveToLeft (*robot))
             this->robot->moveToLeft ();
           break;
-        case 260:
+        case 261:
           if (this->table->canMoveToRight (*robot))
             this->robot->moveToRight ();
           break;

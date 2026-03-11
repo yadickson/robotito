@@ -1,27 +1,19 @@
+#include <ncurses.h>
+
 #include "table.hpp"
-
-Table::Table (Display *display) { this->display = display; }
-
-Table::Table (const Table &table) { this->display = table.display; }
 
 Table::~Table () {}
 
-void
-Table::operator= (const Table &table)
+bool
+Table::canMoveToRight (const Robot &robot) const
 {
-  this->display = table.display;
+  return robot.getPosition ()->getX () < COLS - 3;
 }
 
 bool
 Table::canMoveToLeft (const Robot &robot) const
 {
-  return robot.getPosition ()->getX () < this->display->getWidth () - 3;
-}
-
-bool
-Table::canMoveToRight (const Robot &robot) const
-{
-  return robot.getPosition ()->getX () > 2;
+  return robot.getPosition ()->getX () > 1;
 }
 
 bool
@@ -33,5 +25,5 @@ Table::canMoveToUp (const Robot &robot) const
 bool
 Table::canMoveToDown (const Robot &robot) const
 {
-  return robot.getPosition ()->getY () < this->display->getHeight () - 2;
+  return robot.getPosition ()->getY () < LINES - 2;
 }

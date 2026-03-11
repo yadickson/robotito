@@ -7,6 +7,7 @@ private:
   int y;
 
 public:
+  explicit Position ();
   explicit Position (const Position &position);
   explicit Position (const int x, const int y);
   virtual ~Position ();

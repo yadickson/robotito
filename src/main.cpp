@@ -16,8 +16,8 @@ main (int argc, char *argv[])
 
   Display display;
   Keyboard keyboard;
-  Table table (&display);
-  Position position (2, 1);
+  Table table;
+  Position position;
   Robot robot (&position);
   Game game (&display, &keyboard, &table, &robot);
 

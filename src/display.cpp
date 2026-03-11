@@ -17,20 +17,20 @@ Display::initialize ()
   mainWindow = initscr ();
   noecho ();
   cbreak ();
-  keypad (mainWindow, TRUE);
+  keypad (stdscr, TRUE);
   curs_set (0);
-  refresh ();
 
   childWindow = subwin (mainWindow, 0, 0, 0, 0);
 
-  box (childWindow, 0, 0);
+  reload ();
 }
 
 void
 Display::reload ()
 {
-  destroy ();
-  initialize ();
+  clear ();
+  box (childWindow, 0, 0);
+  refresh ();
 }
 
 void

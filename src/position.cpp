@@ -1,4 +1,12 @@
+#include <ncurses.h>
+
 #include "position.hpp"
+
+Position::Position ()
+{
+  this->x = 0;
+  this->y = 0;
+}
 
 Position::Position (const Position &position)
 {
@@ -20,13 +28,13 @@ Position::~Position () {}
 int
 Position::getX () const
 {
-  return this->x;
+  return this->x < COLS - 3 ? this->x : COLS - 3;
 }
 
 int
 Position::getY () const
 {
-  return this->y;
+  return this->y < LINES - 2 ? this->y : LINES - 2;
 }
 
 void
