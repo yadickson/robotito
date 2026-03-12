@@ -8,6 +8,8 @@ jobs:
     runs-on: macos-latest
 
     steps:
+      - name: Install LLVM
+        uses: kittaakos/install-llvm-action@v2
       - name: checkout source code
         uses: actions/checkout@v4
       - name: update operating system
@@ -23,7 +25,6 @@ jobs:
           brew install cpputest
           brew install lcov
           brew install cppcheck
-          brew install llvm
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure
