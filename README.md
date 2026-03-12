@@ -31,6 +31,42 @@ autoreconf -ivf
 make
 ```
 
+## format
+
+```bash
+make format
+```
+
+## lint
+
+```bash
+make lint
+```
+
+## check
+
+```bash
+make check
+```
+
+## distcheck
+
+```bash
+make distcheck
+```
+
+## test
+
+```bash
+make test
+```
+
+## coverage
+
+```bash
+make coverage
+```
+
 ## run
 
 ```bash
