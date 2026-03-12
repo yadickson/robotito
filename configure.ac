@@ -9,7 +9,7 @@ AC_PROG_CXX
 
 AX_CXX_COMPILE_STDCXX_11
 
-AM_CXXFLAGS="$AM_CXXFLAGS -std=c++11 -W -Wall -Werror"
+AM_CXXFLAGS = "$AM_CXXFLAGS -std=c++11 -W -Wall -Werror"
 AC_SUBST([AM_CXXFLAGS])
 
 AC_PROG_INSTALL
@@ -21,22 +21,26 @@ AM_EXTRA_RECURSIVE_TARGETS([
 	format
 	lint
 	cppcheck
-])
+	])
 
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
 	test/Makefile
-])
+	])
 
 PKG_PROG_PKG_CONFIG
 
+AC_CHECK_PROGS([CFORMAT], [clang-format], [yes], [])
+AC_CHECK_PROGS([CLINT], [clang-tidy], [yes], [])
 AC_CHECK_PROGS([CPPCHECK], [cppcheck], [yes], [])
 
-AS_VAR_IF([CPPCHECK], [cppcheck], [], [AC_MSG_ERROR([cppcheck is required])])
+AS_VAR_IF([CFORMAT], [clang-format], [], [AC_MSG_WARN([clang-format is required to format static code])])
+AS_VAR_IF([CLINT], [clang-tidy], [], [AC_MSG_WARN([clang-tidy is required to check static code])])
+AS_VAR_IF([CPPCHECK], [cppcheck], [], [AC_MSG_WARN([cppcheck is required to check static code])])
 
 PKG_CHECK_MODULES([DEPENDENCIES], [ncursesw])
-      
+
 AC_MSG_CHECKING([tests enabled])
 AC_ARG_ENABLE([tests],[AS_HELP_STRING([--disable-tests], [Disable tests])], [enable_tests=no], [enable_tests=yes])
 AC_MSG_RESULT($enable_tests)
@@ -55,11 +59,11 @@ if test "x$enable_tests" = xyes; then
 	if test "x$enable_coverage" = xyes; then
 		AC_CHECK_PROGS([LCOV], [lcov], [yes], [])
 		AC_CHECK_PROGS([GENHTML], [genhtml], [yes], [])
-	
+
 		AS_VAR_IF([LCOV], [lcov], [], [AC_MSG_ERROR([lcov is required])])
 		AS_VAR_IF([GENHTML], [genhtml], [], [AC_MSG_ERROR([genhtml is required])])
 	fi
-fi
+	fi
 
 AC_CHECK_HEADER([clocale])
 AC_CHECK_HEADER([iostream])
@@ -68,5 +72,8 @@ AC_CHECK_HEADER([cstddef])
 
 AM_CONDITIONAL(RUN_TESTS, [test "x$enable_tests" = xyes])
 AM_CONDITIONAL(RUN_COVERAGE, [test "x$enable_coverage" = xyes])
+AM_CONDITIONAL(RUN_FORMAT, [test "x$CFORMAT" = xclang-format])
+AM_CONDITIONAL(RUN_LINT, [test "x$CLINT" = xclang-tidy])
+AM_CONDITIONAL(RUN_CPPCHECK, [test "x$CPPCHECK" = xcppcheck])
 
 AC_OUTPUT

@@ -1,6 +1,6 @@
-BLUE  := $(shell tput -Txterm setaf 4)\\n
+BLUE := $(shell tput -Txterm setaf 4)\\n
 GREEN := $(shell tput -Txterm setaf 2)\\n
-NC    := $(shell tput -Txterm sgr0)\\n
+NC := $(shell tput -Txterm sgr0)\\n
 
 EXTRA_DIST = position-mock.hpp macros-test.hpp
 
@@ -23,20 +23,32 @@ TEST_FILES = \
 	$(top_srcdir)/test/robot-test.cpp \
 	$(top_srcdir)/test/position-test.cpp
 
+	if RUN_FORMAT
+
 format-local:
 	@printf "$(BLUE)Formating test files.${NC}"
 	clang-format --sort-includes --style=GNU -i $(top_srcdir)/test/*.*pp
 	@printf "$(GREEN)OK${NC}"
+
+endif
+
+if RUN_LINT
 
 lint-local: $(EXTRA_DIST) $(TEST_FILES)
 	@printf "$(BLUE)Checking static code test files.${NC}"
 	clang-tidy $^ -- -I$(top_srcdir)/src $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(AM_CXXFLAGS)
 	@printf "$(GREEN)OK${NC}"
 
+endif
+
+if RUN_CPPCHECK
+
 cppcheck-local:
 	@printf "$(BLUE)Running cppcheck test files.${NC}"
 	cppcheck $(top_srcdir)/test --enable=all --language=c++ --suppress=missingIncludeSystem -I$(top_srcdir)/src
 	@printf "$(GREEN)OK${NC}"
+
+endif
 
 if RUN_TESTS
 
@@ -50,7 +62,7 @@ test-local: robotito_test
 	./robotito_test -c -v -ojunit
 	@printf "$(GREEN)OK${NC}"
 
-if RUN_COVERAGE
+	if RUN_COVERAGE
 
 coverage-local: test-local
 	@printf "${BLUE}Running coverage.${NC}"
