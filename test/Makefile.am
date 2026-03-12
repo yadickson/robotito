@@ -1,6 +1,6 @@
 BLUE := $(shell tput -Txterm setaf 4)\\n
 GREEN := $(shell tput -Txterm setaf 2)\\n
-NC := $(shell tput -Txterm sgr0)\\n
+NC := $(shell tput -Txterm sgr0)\\n\\n
 
 EXTRA_DIST = position-mock.hpp macros-test.hpp
 
@@ -23,7 +23,7 @@ TEST_FILES = \
 	$(top_srcdir)/test/robot-test.cpp \
 	$(top_srcdir)/test/position-test.cpp
 
-	if RUN_FORMAT
+if RUN_FORMAT
 
 format-local:
 	@printf "$(BLUE)Formating test files.${NC}"
@@ -62,7 +62,7 @@ test-local: robotito_test
 	./robotito_test -c -v -ojunit
 	@printf "$(GREEN)OK${NC}"
 
-	if RUN_COVERAGE
+if RUN_COVERAGE
 
 coverage-local: test-local
 	@printf "${BLUE}Running coverage.${NC}"

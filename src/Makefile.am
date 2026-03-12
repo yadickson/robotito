@@ -1,6 +1,6 @@
 BLUE := $(shell tput -Txterm setaf 4)\\n
 GREEN := $(shell tput -Txterm setaf 2)\\n
-NC := $(shell tput -Txterm sgr0)\\n
+NC := $(shell tput -Txterm sgr0)\\n\\n
 
 EXTRA_DIST = keyboard.hpp table.hpp position.hpp robot.hpp game.hpp display.hpp
 
