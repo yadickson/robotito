@@ -18,7 +18,7 @@ format-local:
 
 lint-local: $(SOURSES)
 	@echo -e "${BLUE}Checking static code src files.${NC}"
-	clang-tidy $^ -- $(AM_CXXFLAGS)
+	clang-tidy $^ -- $(DEPENDENCIES_CFLAGS) $(AM_CXXFLAGS)
 	@echo -e "$(GREEN)OK${NC}"
 
 cppcheck-local:

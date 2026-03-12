@@ -30,7 +30,7 @@ format-local:
 
 lint-local: $(EXTRA_DIST) $(TEST_FILES)
 	@echo -e "$(BLUE)Checking static code test files.${NC}"
-	clang-tidy $^ -- -I$(top_srcdir)/src $(AM_CXXFLAGS)
+	clang-tidy $^ -- -I$(top_srcdir)/src $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(AM_CXXFLAGS)
 	@echo -e "$(GREEN)OK${NC}"
 
 cppcheck-local:
