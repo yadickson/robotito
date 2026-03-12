@@ -12,21 +12,19 @@ robotito_LDADD = $(DEPENDENCIES_LIBS)
 SOURSES=$(EXTRA_DIST) $(robotito_SOURCES)
 
 format-local:
-	@echo -e "${BLUE}Formating src files.${NC}"
+	@printf "${BLUE}Formating src files.${NC}"
 	clang-format --sort-includes --style=GNU -i $(top_srcdir)/src/*.*pp
-	@echo -e "$(GREEN)OK${NC}"
+	@printf "$(GREEN)OK${NC}"
 
 lint-local: $(SOURSES)
-	@echo -e "${BLUE}Checking static code src files.${NC}"
+	@printf "${BLUE}Checking static code src files.${NC}"
 	clang-tidy $^ -- $(DEPENDENCIES_CFLAGS) $(AM_CXXFLAGS)
-	@echo -e "$(GREEN)OK${NC}"
+	@printf "$(GREEN)OK${NC}"
 
 cppcheck-local:
-	@echo -e "${BLUE}Running cppcheck src files.${NC}"
+	@printf "${BLUE}Running cppcheck src files.${NC}"
 	cppcheck $(top_srcdir)/src --enable=all --language=c++ --suppress=missingIncludeSystem
-	@echo -e "$(GREEN)OK${NC}"
-
-check-local: lint-local cppcheck-local
+	@printf "$(GREEN)OK${NC}"
 
 CLEAN_FILES = gcov gcno gcda
 

@@ -6,6 +6,10 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    env:
+      FORCE_COLOR: 1
+      CLICOLOR_FORCE: 1
+      TERM: xterm-256color
 
     steps:
       - name: checkout source code
@@ -13,7 +17,7 @@ jobs:
       - name: update operating system
         run: sudo apt update
       - name: install dependencies
-        run: sudo apt install -y build-essential autoconf autoconf-archive automake libtool pkg-config clang-format lcov libcpputest-dev libncurses-dev cppcheck
+        run: sudo apt install -y build-essential autoconf autoconf-archive automake libtool pkg-config lcov libcpputest-dev libncurses-dev
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure

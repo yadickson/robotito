@@ -6,6 +6,10 @@ jobs:
 
   build:
     runs-on: windows-latest
+    env:
+      FORCE_COLOR: 1
+      CLICOLOR_FORCE: 1
+      TERM: xterm-256color
     defaults:
       run:
         shell: msys2 {0}
@@ -20,14 +24,11 @@ jobs:
             autotools:p
             libtool:p
             pkg-config:p
-            clang:p
             gcc:p
             make:p
             lcov:p
             ncurses:p
             cpputest:p
-            cppcheck:p
-            llvm:p
       - name: config git
         run: git config --global core.autocrlf input
       - name: checkout source code

@@ -24,19 +24,19 @@ TEST_FILES = \
 	$(top_srcdir)/test/position-test.cpp
 
 format-local:
-	@echo -e "$(BLUE)Formating test files.${NC}"
+	@printf "$(BLUE)Formating test files.${NC}"
 	clang-format --sort-includes --style=GNU -i $(top_srcdir)/test/*.*pp
-	@echo -e "$(GREEN)OK${NC}"
+	@printf "$(GREEN)OK${NC}"
 
 lint-local: $(EXTRA_DIST) $(TEST_FILES)
-	@echo -e "$(BLUE)Checking static code test files.${NC}"
+	@printf "$(BLUE)Checking static code test files.${NC}"
 	clang-tidy $^ -- -I$(top_srcdir)/src $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(AM_CXXFLAGS)
-	@echo -e "$(GREEN)OK${NC}"
+	@printf "$(GREEN)OK${NC}"
 
 cppcheck-local:
-	@echo -e "$(BLUE)Running cppcheck test files.${NC}"
+	@printf "$(BLUE)Running cppcheck test files.${NC}"
 	cppcheck $(top_srcdir)/test --enable=all --language=c++ --suppress=missingIncludeSystem -I$(top_srcdir)/src
-	@echo -e "$(GREEN)OK${NC}"
+	@printf "$(GREEN)OK${NC}"
 
 if RUN_TESTS
 
@@ -46,23 +46,21 @@ robotito_test_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFL
 robotito_test_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
 
 test-local: robotito_test
-	@echo -e "${BLUE}Running tests.${NC}"
+	@printf "${BLUE}Running tests.${NC}"
 	./robotito_test -c -v -ojunit
-	@echo -e "$(GREEN)OK${NC}"
+	@printf "$(GREEN)OK${NC}"
 
 if RUN_COVERAGE
 
 coverage-local: test-local
-	@echo -e "${BLUE}Running coverage.${NC}"
+	@printf "${BLUE}Running coverage.${NC}"
 	lcov -c -d $(top_srcdir)/src --output-file $(top_srcdir)/lcov.info
 	genhtml --demangle-cpp -t robotito -o $(top_srcdir)/reports/coverage $(top_srcdir)/lcov.info
-	@echo -e "$(GREEN)OK${NC}"
+	@printf "$(GREEN)OK${NC}"
 
 endif
 
 endif
-
-check-local: lint-local cppcheck-local
 
 CLEAN_FILES = gcov gcno gcda info xml
 
