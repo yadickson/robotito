@@ -2,11 +2,7 @@
 
 #include "display.hpp"
 
-Display::Display ()
-{
-  this->mainWindow = NULL;
-  this->childWindow = NULL;
-}
+Display::Display () { this->window = NULL; }
 
 Display::~Display () { destroy (); }
 
@@ -14,13 +10,11 @@ void
 Display::initialize ()
 {
 
-  mainWindow = initscr ();
+  window = initscr ();
   noecho ();
   cbreak ();
-  keypad (stdscr, TRUE);
+  keypad (window, TRUE);
   curs_set (0);
-
-  childWindow = subwin (mainWindow, 0, 0, 0, 0);
 
   reload ();
 }
@@ -28,41 +22,36 @@ Display::initialize ()
 void
 Display::reload ()
 {
-  clear ();
-  box (childWindow, 0, 0);
-  refresh ();
+  wclear (window);
+  wborder (window, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
 void
 Display::destroy ()
 {
 
-  if (childWindow)
-    delwin (childWindow);
-
-  if (mainWindow)
-    delwin (mainWindow);
+  if (window)
+    delwin (window);
 
   endwin ();
 
-  childWindow = NULL;
-  mainWindow = NULL;
+  window = NULL;
 }
 
 WINDOW *
 Display::getWindow () const
 {
-  return childWindow;
+  return window;
 }
 
 int
 Display::getWidth () const
 {
-  return childWindow ? getmaxx (childWindow) : 0;
+  return window ? getmaxx (window) : 0;
 }
 
 int
 Display::getHeight () const
 {
-  return childWindow ? getmaxy (childWindow) : 0;
+  return window ? getmaxy (window) : 0;
 }

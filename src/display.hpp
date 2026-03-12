@@ -5,8 +5,7 @@
 class Display
 {
 private:
-  WINDOW *mainWindow;
-  WINDOW *childWindow;
+  WINDOW *window;
 
 public:
   explicit Display ();

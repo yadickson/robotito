@@ -15,6 +15,7 @@ jobs:
       - name: install dependencies
         run: |
           brew install autoconf
+          brew install autoconf-archive
           brew install automake
           brew instal libtool
           brew install pkg-config
@@ -22,6 +23,7 @@ jobs:
           brew install cpputest
           brew install lcov
           brew install cppcheck
+          brew install llvm
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure

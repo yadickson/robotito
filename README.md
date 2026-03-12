@@ -5,6 +5,7 @@ Un jueguito para aprender a mover un robot en un tablero
 ## required
 
 - autoconf
+- autoconf-archive
 - automake
 - libtool
 - pkg-config
@@ -12,7 +13,7 @@ Un jueguito para aprender a mover un robot en un tablero
 - libncurses-dev
 - lcov
 - cppcheck
-- clang-format
+- clang-format, clang-tidy (llvm)
 
 ## configuration
 

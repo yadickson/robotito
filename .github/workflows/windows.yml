@@ -18,6 +18,7 @@ jobs:
           install: git
           pacboy: >-
             autotools:p
+            autoconf-archive:p
             libtool:p
             pkg-config:p
             clang:p
@@ -27,6 +28,7 @@ jobs:
             ncurses:p
             cpputest:p
             cppcheck:p
+            llvm:p
       - name: config git
         run: git config --global core.autocrlf input
       - name: checkout source code

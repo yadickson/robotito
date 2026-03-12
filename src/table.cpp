@@ -13,7 +13,7 @@ Table::canMoveToRight (const Robot &robot) const
 bool
 Table::canMoveToLeft (const Robot &robot) const
 {
-  return robot.getPosition ()->getX () > 1;
+  return robot.getPosition ()->getX () > 2;
 }
 
 bool

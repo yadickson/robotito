@@ -29,6 +29,7 @@ Game::execute ()
   robot->getPosition ()->setY (LINES / 2);
 
   const char *emoji = "\U0001F916";
+  char clean[2] = { ' ', '\0' };
 
   do
     {
@@ -45,11 +46,9 @@ Game::execute ()
 
       mvwaddstr (display->getWindow (), y, x, emoji);
 
-      wrefresh (display->getWindow ());
-
       keyboard->execute ();
 
-      mvwaddch (display->getWindow (), y, x, ' ');
+      mvwaddstr (display->getWindow (), y, x, clean);
 
       const int key = keyboard->getKey ();
 
