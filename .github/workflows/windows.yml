@@ -18,7 +18,6 @@ jobs:
           install: git
           pacboy: >-
             autotools:p
-            autoconf-archive:p
             libtool:p
             pkg-config:p
             clang:p
