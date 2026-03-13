@@ -24,7 +24,6 @@ jobs:
             make:p
             lcov:p
             ncurses:p
-            cpputest:p
             clang:p
             cppcheck:p
       - name: config git
