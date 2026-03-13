@@ -24,12 +24,9 @@ jobs:
             make:p
             lcov:p
             ncurses:p
+            cpputest:p
             clang:p
             cppcheck:p
-      - name: Install LLVM (clang-tidy)
-        uses: KyleMayes/install-llvm-action@v2
-        with:
-          version: "19"
       - name: config git
         run: git config --global core.autocrlf input
       - name: checkout source code
