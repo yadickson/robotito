@@ -6,37 +6,32 @@ EXTRA_DIST = keyboard.hpp table.hpp position.hpp robot.hpp game.hpp display.hpp
 
 bin_PROGRAMS = robotito
 robotito_SOURCES = main.cpp position.cpp robot.cpp keyboard.cpp game.cpp table.cpp display.cpp
-robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(AM_CXXFLAGS)
+robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(CUSTOM_CXXFLAGS)
 robotito_LDADD = $(DEPENDENCIES_LIBS)
 
 SOURSES = $(EXTRA_DIST) $(robotito_SOURCES)
 
-if RUN_FORMAT
-
-format-local:
+format-local: $(SOURSES)
 	@printf "${BLUE}Formating src files.${NC}"
-	clang-format --sort-includes --style=GNU -i $(top_srcdir)/src/*.*pp
-	@printf "$(GREEN)OK${NC}"
-
-endif
-
 if RUN_TIDY
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions" --fix $^ -- -std=$(COMPILE_STDCXX) -x c++
+endif
+if RUN_FORMAT
+	clang-format --sort-includes --style=GNU -i $^
+endif
+	@printf "$(GREEN)OK${NC}"
 
 lint-local: $(SOURSES)
 	@printf "${BLUE}Checking static code src files.${NC}"
-	clang-tidy --checks="cppcoreguidelines-*,modernize-*" --fix $^ -- $(DEPENDENCIES_CFLAGS) $(AM_CXXFLAGS)
-	@printf "$(GREEN)OK${NC}"
-
+if RUN_TIDY
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions" $^ -- -std=$(COMPILE_STDCXX) -x c++
 endif
-
 if RUN_CPPCHECK
-
-cppcheck-local:
-	@printf "${BLUE}Running cppcheck src files.${NC}"
 	cppcheck $(top_srcdir)/src --enable=all --library=std -I$(top_srcdir)/src --suppress=missingIncludeSystem
+endif
 	@printf "$(GREEN)OK${NC}"
 
-endif
+check-local: lint-local
 
 CLEAN_FILES = gcov gcno gcda
 

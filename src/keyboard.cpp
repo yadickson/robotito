@@ -3,14 +3,11 @@
 
 #include "keyboard.hpp"
 
-Keyboard::Keyboard () { this->key = 0; }
+Keyboard::Keyboard () : key (0) {}
 
-Keyboard::Keyboard (const Keyboard &keyboard)
-{
-  this->key = keyboard.getKey ();
-}
+Keyboard::Keyboard (const Keyboard &keyboard) : key (keyboard.getKey ()) {}
 
-Keyboard::~Keyboard () {}
+Keyboard::~Keyboard () = default;
 
 void
 Keyboard::execute ()
@@ -18,14 +15,14 @@ Keyboard::execute ()
   this->key = getch ();
 }
 
-int
-Keyboard::getKey () const
+auto
+Keyboard::getKey () const -> int
 {
   return this->key;
 }
 
-bool
-Keyboard::isExit () const
+auto
+Keyboard::isExit () const -> bool
 {
   return toupper (this->key) == 'Q';
 }

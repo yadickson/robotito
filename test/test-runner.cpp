@@ -7,10 +7,10 @@
 #include <CppUTestExt/MockSupport.h>
 #include <CppUTestExt/MockSupportPlugin.h>
 
-int
-main (int argc, char *argv[])
+auto
+main (int argc, char *argv[]) -> int
 {
-  srand ((unsigned)time (NULL));
+  srand ((unsigned)time (nullptr));
 
   MockSupportPlugin mockSupport;
   TestRegistry::getCurrentRegistry ()->installPlugin (&mockSupport);

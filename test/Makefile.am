@@ -20,41 +20,35 @@ SRC_FILES = \
 
 TEST_FILES = \
 	$(top_srcdir)/test/test-runner.cpp \
+	$(top_srcdir)/test/position-mock.cpp \
 	$(top_srcdir)/test/robot-test.cpp \
 	$(top_srcdir)/test/position-test.cpp
 
-if RUN_FORMAT
-
-format-local:
+format-local: $(EXTRA_DIST) $(TEST_FILES)
 	@printf "$(BLUE)Formating test files.${NC}"
-	clang-format --sort-includes --style=GNU -i $(top_srcdir)/test/*.*pp
-	@printf "$(GREEN)OK${NC}"
-
-endif
-
 if RUN_TIDY
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-macro-usage" --fix $^ -- -std=$(COMPILE_STDCXX) -x c++ -I$(top_srcdir)/src
+endif
+if RUN_FORMAT
+	clang-format --sort-includes --style=GNU -i $^
+endif
+	@printf "$(GREEN)OK${NC}"
 
 lint-local: $(EXTRA_DIST) $(TEST_FILES)
 	@printf "$(BLUE)Checking static code test files.${NC}"
-	clang-tidy --checks="cppcoreguidelines-*,modernize-*" --fix $^ -- -I$(top_srcdir)/src $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(AM_CXXFLAGS)
-	@printf "$(GREEN)OK${NC}"
-
+if RUN_TIDY
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-macro-usage" $^ -- -std=$(COMPILE_STDCXX) -x c++ -I$(top_srcdir)/src
 endif
-
 if RUN_CPPCHECK
-
-cppcheck-local:
-	@printf "$(BLUE)Running cppcheck test files.${NC}"
 	cppcheck $(top_srcdir)/test --enable=all --library=std -I$(top_srcdir)/src --suppress=missingIncludeSystem
-	@printf "$(GREEN)OK${NC}"
-
 endif
+	@printf "$(GREEN)OK${NC}"
 
 if RUN_TESTS
 
 noinst_PROGRAMS = robotito_test
 robotito_test_SOURCES = $(SRC_FILES) $(TEST_FILES)
-robotito_test_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(AM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage --coverage -I$(top_srcdir)/src
+robotito_test_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage --coverage -I$(top_srcdir)/src
 robotito_test_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
 
 test-local: robotito_test
@@ -73,6 +67,8 @@ coverage-local: test-local
 endif
 
 endif
+
+check-local: lint-local
 
 CLEAN_FILES = gcov gcno gcda info xml
 

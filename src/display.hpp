@@ -1,10 +1,10 @@
-#pragma once
+#ifndef DISPLAY_HPP_
+#define DISPLAY_HPP_
 
 #include <ncurses.h>
 
 class Display
 {
-private:
   WINDOW *window;
 
 public:
@@ -14,11 +14,13 @@ public:
   virtual void initialize ();
   virtual void reload ();
 
-  virtual WINDOW *getWindow () const;
+  virtual auto getWindow () const -> WINDOW *;
 
-  virtual int getWidth () const;
-  virtual int getHeight () const;
+  virtual auto getWidth () const -> int;
+  virtual auto getHeight () const -> int;
 
 protected:
   virtual void destroy ();
 };
+
+#endif // DISPLAY_HPP_

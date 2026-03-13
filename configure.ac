@@ -9,8 +9,11 @@ AC_PROG_CXX
 
 AX_CXX_COMPILE_STDCXX_11
 
-AM_CXXFLAGS="$AM_CXXFLAGS -std=c++11 -W -Wall -Werror"
-AC_SUBST([AM_CXXFLAGS])
+COMPILE_STDCXX="c++11"
+CUSTOM_CXXFLAGS="-std=${COMPILE_STDCXX} -W -Wall -Werror -Wno-pragma-once-outside-header"
+
+AC_SUBST([COMPILE_STDCXX])
+AC_SUBST([CUSTOM_CXXFLAGS])
 
 AC_PROG_INSTALL
 AC_CONFIG_HEADERS([config.h])
@@ -20,7 +23,6 @@ AM_EXTRA_RECURSIVE_TARGETS([
 	coverage
 	format
 	lint
-	cppcheck
 	])
 
 AC_CONFIG_FILES([

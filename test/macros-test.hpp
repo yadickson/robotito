@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MACROS_TEST_HPP_
+#define MACROS_TEST_HPP_
 
 #include <CppUTest/CommandLineTestRunner.h>
 #include <CppUTest/TestHarness.h>
@@ -17,3 +18,5 @@
 #define MACRO_TEST(input, method) TEST (input, method)
 
 #define MACRO_CHECK_EQUAL(expected, actual) CHECK_EQUAL (expected, actual)
+
+#endif // MACROS_TEST_HPP_

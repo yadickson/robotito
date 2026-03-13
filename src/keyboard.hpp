@@ -1,8 +1,8 @@
-#pragma once
+#ifndef KEYBOARD_HPP_
+#define KEYBOARD_HPP_
 
 class Keyboard
 {
-private:
   int key;
 
 public:
@@ -10,6 +10,8 @@ public:
   explicit Keyboard (const Keyboard &keyboard);
   virtual ~Keyboard ();
   virtual void execute ();
-  virtual int getKey () const;
-  virtual bool isExit () const;
+  virtual auto getKey () const -> int;
+  virtual auto isExit () const -> bool;
 };
+
+#endif // KEYBOARD_HPP_

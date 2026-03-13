@@ -9,8 +9,8 @@
 #include "robot.hpp"
 #include "table.hpp"
 
-int
-main ()
+auto
+main () -> int
 {
   setlocale (LC_ALL, "");
 

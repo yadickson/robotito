@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAME_HPP_
+#define GAME_HPP_
 
 #include "display.hpp"
 #include "keyboard.hpp"
@@ -7,7 +8,6 @@
 
 class Game
 {
-private:
   Display *display;
   Keyboard *keyboard;
   Table *table;
@@ -20,3 +20,5 @@ public:
   virtual ~Game ();
   virtual void execute ();
 };
+
+#endif // GAME_HPP_

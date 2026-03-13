@@ -2,28 +2,28 @@
 
 #include "table.hpp"
 
-Table::~Table () {}
+Table::~Table () = default;
 
-bool
-Table::canMoveToRight (const Robot &robot) const
+auto
+Table::canMoveToRight (const Robot &robot) const -> bool
 {
   return robot.getPosition ()->getX () < COLS - 3;
 }
 
-bool
-Table::canMoveToLeft (const Robot &robot) const
+auto
+Table::canMoveToLeft (const Robot &robot) const -> bool
 {
   return robot.getPosition ()->getX () > 2;
 }
 
-bool
-Table::canMoveToUp (const Robot &robot) const
+auto
+Table::canMoveToUp (const Robot &robot) const -> bool
 {
   return robot.getPosition ()->getY () > 1;
 }
 
-bool
-Table::canMoveToDown (const Robot &robot) const
+auto
+Table::canMoveToDown (const Robot &robot) const -> bool
 {
   return robot.getPosition ()->getY () < LINES - 2;
 }

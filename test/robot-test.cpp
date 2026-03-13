@@ -1,4 +1,4 @@
-#include "position-mock.hpp"
+#include "position-mock.cpp"
 #include "robot.hpp"
 
 MACRO_TEST_CLASS (Robot)

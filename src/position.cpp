@@ -1,36 +1,32 @@
 #include "position.hpp"
 
-Position::Position ()
-{
-  this->x = 0;
-  this->y = 0;
-}
+Position::Position () : x (0), y (0) {}
 
 Position::Position (const Position &position)
+    : x (position.getX ()), y (position.getY ())
 {
-  this->x = position.getX ();
-  this->y = position.getY ();
 }
 
 Position::Position (const int x, const int y) : x (x), y (y) {}
 
-void
-Position::operator= (const Position &position)
+auto
+Position::operator= (const Position &position) -> Position &
 {
   this->x = position.getX ();
   this->y = position.getY ();
+  return *this;
 }
 
-Position::~Position () {}
+Position::~Position () = default;
 
-int
-Position::getX () const
+auto
+Position::getX () const -> int
 {
   return this->x;
 }
 
-int
-Position::getY () const
+auto
+Position::getY () const -> int
 {
   return this->y;
 }
