@@ -14,10 +14,10 @@ public:
   virtual void initialize ();
   virtual void reload ();
 
-  virtual auto getWindow () const -> WINDOW *;
+  [[nodiscard]] virtual auto getWindow () const -> WINDOW *;
 
-  virtual auto getWidth () const -> int;
-  virtual auto getHeight () const -> int;
+  [[nodiscard]] virtual auto getWidth () const -> int;
+  [[nodiscard]] virtual auto getHeight () const -> int;
 
 protected:
   virtual void destroy ();

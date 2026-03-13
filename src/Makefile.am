@@ -14,7 +14,7 @@ SOURSES = $(EXTRA_DIST) $(robotito_SOURCES)
 format-local: $(SOURSES)
 	@printf "${BLUE}Formating src files.${NC}"
 if RUN_TIDY
-	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions" --fix $^ -- -std=$(COMPILE_STDCXX) -x c++
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions" --fix $^ -- $(STDCXX_CXXFLAGS) -x c++
 endif
 if RUN_FORMAT
 	clang-format --sort-includes --style=GNU -i $^
@@ -24,7 +24,7 @@ endif
 lint-local: $(SOURSES)
 	@printf "${BLUE}Checking static code src files.${NC}"
 if RUN_TIDY
-	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions" $^ -- -std=$(COMPILE_STDCXX) -x c++
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions" $^ -- $(STDCXX_CXXFLAGS) -x c++
 endif
 if RUN_CPPCHECK
 	cppcheck $(top_srcdir)/src --enable=all --library=std -I$(top_srcdir)/src --suppress=missingIncludeSystem

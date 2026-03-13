@@ -27,7 +27,7 @@ TEST_FILES = \
 format-local: $(EXTRA_DIST) $(TEST_FILES)
 	@printf "$(BLUE)Formating test files.${NC}"
 if RUN_TIDY
-	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-macro-usage" --fix $^ -- -std=$(COMPILE_STDCXX) -x c++ -I$(top_srcdir)/src
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-macro-usage" --fix $^ -- $(STDCXX_CXXFLAGS) -x c++ -I$(top_srcdir)/src
 endif
 if RUN_FORMAT
 	clang-format --sort-includes --style=GNU -i $^
@@ -37,7 +37,7 @@ endif
 lint-local: $(EXTRA_DIST) $(TEST_FILES)
 	@printf "$(BLUE)Checking static code test files.${NC}"
 if RUN_TIDY
-	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-macro-usage" $^ -- -std=$(COMPILE_STDCXX) -x c++ -I$(top_srcdir)/src
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-macro-usage" $^ -- $(STDCXX_CXXFLAGS) -x c++ -I$(top_srcdir)/src
 endif
 if RUN_CPPCHECK
 	cppcheck $(top_srcdir)/test --enable=all --library=std -I$(top_srcdir)/src --suppress=missingIncludeSystem

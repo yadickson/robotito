@@ -12,7 +12,7 @@ public:
   explicit Robot (const Robot &robot);
   virtual ~Robot ();
   auto operator= (const Robot &robot) -> Robot &;
-  virtual auto getPosition () const -> Position *;
+  [[nodiscard]] virtual auto getPosition () const -> Position *;
   virtual void moveToLeft ();
   virtual void moveToRight ();
   virtual void moveToUp ();

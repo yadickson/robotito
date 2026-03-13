@@ -8,10 +8,10 @@ class Table
 public:
   virtual ~Table ();
 
-  virtual auto canMoveToLeft (const Robot &robot) const -> bool;
-  virtual auto canMoveToRight (const Robot &robot) const -> bool;
-  virtual auto canMoveToUp (const Robot &robot) const -> bool;
-  virtual auto canMoveToDown (const Robot &robot) const -> bool;
+  [[nodiscard]] virtual auto canMoveToLeft (const Robot &robot) const -> bool;
+  [[nodiscard]] virtual auto canMoveToRight (const Robot &robot) const -> bool;
+  [[nodiscard]] virtual auto canMoveToUp (const Robot &robot) const -> bool;
+  [[nodiscard]] virtual auto canMoveToDown (const Robot &robot) const -> bool;
 };
 
 #endif // TABLE_HPP_

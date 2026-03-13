@@ -10,8 +10,8 @@ public:
   explicit Keyboard (const Keyboard &keyboard);
   virtual ~Keyboard ();
   virtual void execute ();
-  virtual auto getKey () const -> int;
-  virtual auto isExit () const -> bool;
+  [[nodiscard]] virtual auto getKey () const -> int;
+  [[nodiscard]] virtual auto isExit () const -> bool;
 };
 
 #endif // KEYBOARD_HPP_

@@ -13,7 +13,7 @@ jobs:
       - name: update operating system
         run: sudo apt update
       - name: install dependencies
-        run: sudo apt install -y build-essential autoconf autoconf-archive automake libtool pkg-config lcov libcpputest-dev libncurses-dev
+        run: sudo apt install -y build-essential autoconf autoconf-archive automake libtool pkg-config lcov libcpputest-dev libncurses-dev clang-format clang-tidy cppcheck
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure

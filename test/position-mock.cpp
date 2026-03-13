@@ -7,7 +7,7 @@ class PositionMock : public Position
 public:
   PositionMock () : Position (0, 0) {}
   ~PositionMock () override = default;
-  auto
+  [[nodiscard]] auto
   getX () const -> int override
   {
     return mock ()
@@ -23,7 +23,7 @@ public:
         .onObject (this)
         .withIntParameter (POSITION_MOCK_SET_X_FUNCTION_PARAMETER_X, x);
   }
-  auto
+  [[nodiscard]] auto
   getY () const -> int override
   {
     return mock ()
