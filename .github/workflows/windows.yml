@@ -26,7 +26,6 @@ jobs:
             ncurses:p
             cpputest:p
             clang:p
-            cppcheck:p
       - name: Install LLVM (clang-tidy)
         uses: KyleMayes/install-llvm-action@v2
         with:
