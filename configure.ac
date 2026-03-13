@@ -69,11 +69,12 @@ AC_CHECK_HEADER([clocale])
 AC_CHECK_HEADER([iostream])
 AC_CHECK_HEADER([cstdlib])
 AC_CHECK_HEADER([cstddef])
+AC_CHECK_HEADER([cctype])
 
 AM_CONDITIONAL(RUN_TESTS, [test "x$enable_tests" = xyes])
 AM_CONDITIONAL(RUN_COVERAGE, [test "x$enable_coverage" = xyes])
 AM_CONDITIONAL(RUN_FORMAT, [test "x$CFORMAT" = xclang-format])
-AM_CONDITIONAL(RUN_LINT, [test "x$CLINT" = xclang-tidy])
+AM_CONDITIONAL(RUN_TIDY, [test "x$CLINT" = xclang-tidy])
 AM_CONDITIONAL(RUN_CPPCHECK, [test "x$CPPCHECK" = xcppcheck])
 
 AC_OUTPUT

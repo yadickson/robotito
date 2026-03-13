@@ -1,4 +1,4 @@
-#include <ctype.h>
+#include <cctype>
 #include <ncurses.h>
 
 #include "keyboard.hpp"

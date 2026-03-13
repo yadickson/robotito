@@ -21,7 +21,4 @@ public:
 
 protected:
   virtual void destroy ();
-
-private:
-  static void static_handler (int signal);
 };

@@ -2,9 +2,9 @@
 
 #include "display.hpp"
 
-Display::Display () { this->window = NULL; }
+Display::Display () : window(nullptr) { }
 
-Display::~Display () { destroy (); }
+Display::~Display () { Display::destroy (); }
 
 void
 Display::initialize ()
@@ -26,18 +26,6 @@ Display::reload ()
   wborder (window, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
-void
-Display::destroy ()
-{
-
-  if (window)
-    delwin (window);
-
-  endwin ();
-
-  window = NULL;
-}
-
 WINDOW *
 Display::getWindow () const
 {
@@ -54,4 +42,16 @@ int
 Display::getHeight () const
 {
   return window ? getmaxy (window) : 0;
+}
+
+void
+Display::destroy ()
+{
+
+  if (window)
+    delwin (window);
+
+  endwin ();
+
+  window = nullptr;
 }

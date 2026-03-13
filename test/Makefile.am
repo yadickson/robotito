@@ -32,11 +32,11 @@ format-local:
 
 endif
 
-if RUN_LINT
+if RUN_TIDY
 
 lint-local: $(EXTRA_DIST) $(TEST_FILES)
 	@printf "$(BLUE)Checking static code test files.${NC}"
-	clang-tidy $^ -- -I$(top_srcdir)/src $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(AM_CXXFLAGS)
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*" --fix $^ -- -I$(top_srcdir)/src $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(AM_CXXFLAGS)
 	@printf "$(GREEN)OK${NC}"
 
 endif
@@ -45,7 +45,7 @@ if RUN_CPPCHECK
 
 cppcheck-local:
 	@printf "$(BLUE)Running cppcheck test files.${NC}"
-	cppcheck $(top_srcdir)/test --enable=all --language=c++ --suppress=missingIncludeSystem -I$(top_srcdir)/src
+	cppcheck $(top_srcdir)/test --enable=all --library=std -I$(top_srcdir)/src --suppress=missingIncludeSystem
 	@printf "$(GREEN)OK${NC}"
 
 endif

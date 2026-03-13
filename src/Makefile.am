@@ -20,11 +20,11 @@ format-local:
 
 endif
 
-if RUN_LINT
+if RUN_TIDY
 
 lint-local: $(SOURSES)
 	@printf "${BLUE}Checking static code src files.${NC}"
-	clang-tidy $^ -- $(DEPENDENCIES_CFLAGS) $(AM_CXXFLAGS)
+	clang-tidy --checks="cppcoreguidelines-*,modernize-*" --fix $^ -- $(DEPENDENCIES_CFLAGS) $(AM_CXXFLAGS)
 	@printf "$(GREEN)OK${NC}"
 
 endif
@@ -33,7 +33,7 @@ if RUN_CPPCHECK
 
 cppcheck-local:
 	@printf "${BLUE}Running cppcheck src files.${NC}"
-	cppcheck $(top_srcdir)/src --enable=all --language=c++ --suppress=missingIncludeSystem
+	cppcheck $(top_srcdir)/src --enable=all --library=std -I$(top_srcdir)/src --suppress=missingIncludeSystem
 	@printf "$(GREEN)OK${NC}"
 
 endif

@@ -180,3 +180,6 @@ configure~
 *~
 .dirstamp
 *.gcov
+
+.idea/
+*.impl
