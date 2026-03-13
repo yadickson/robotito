@@ -3,8 +3,6 @@
 
 MACRO_TEST_CLASS (Robot)
 {
-
-public:
   Position *positionMock;
   Robot *robot;
 
@@ -110,7 +108,7 @@ MACRO_TEST (Robot, should_check_position)
 
 MACRO_TEST (Robot, should_check_copy_robot_constructor)
 {
-  Robot copyRobot (*robot);
+  const Robot copyRobot (*robot);
 
   MACRO_CHECK_EQUAL (positionMock, copyRobot.getPosition ());
 };

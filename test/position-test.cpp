@@ -3,7 +3,6 @@
 
 MACRO_TEST_CLASS (Position)
 {
-public:
   int xFaker;
   int yFaker;
   Position *position;
@@ -24,7 +23,7 @@ public:
 
 MACRO_TEST (Position, should_check_copy_constructor)
 {
-  Position copyPosition (*position);
+  const Position copyPosition (*position);
 
   MACRO_CHECK_EQUAL (xFaker, copyPosition.getX ());
   MACRO_CHECK_EQUAL (yFaker, copyPosition.getY ());
