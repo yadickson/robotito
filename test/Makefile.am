@@ -46,10 +46,13 @@ endif
 
 if RUN_TESTS
 
+LIBSTDCPP := -lstdc++
+TEST_DEPENDENCIES_CPPUTEST_SORT_LIBS = $(subst $(LIBSTDCPP), ,$(TEST_DEPENDENCIES_CPPUTEST_LIBS) )
+
 noinst_PROGRAMS = robotito_test
 robotito_test_SOURCES = $(SRC_FILES) $(TEST_FILES)
 robotito_test_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage --coverage -I$(top_srcdir)/src
-robotito_test_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
+robotito_test_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_SORT_LIBS) $(LIBSTDCPP)
 
 test-local: robotito_test
 	@printf "${BLUE}Running tests.${NC}"
