@@ -65,7 +65,8 @@ if test "x$enable_tests" = xyes; then
 		AS_VAR_IF([LCOV], [lcov], [], [AC_MSG_ERROR([lcov is required])])
 		AS_VAR_IF([GENHTML], [genhtml], [], [AC_MSG_ERROR([genhtml is required])])
 	fi
-	fi
+
+fi
 
 AC_CHECK_HEADER([clocale])
 AC_CHECK_HEADER([iostream])

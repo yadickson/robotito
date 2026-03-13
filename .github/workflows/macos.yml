@@ -23,10 +23,6 @@ jobs:
           brew install lcov
           brew install clang-format
           brew install cppcheck
-      - name: Install LLVM (clang-tidy)
-        uses: KyleMayes/install-llvm-action@v2
-        with:
-          version: "19"
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure
