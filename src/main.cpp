@@ -1,13 +1,10 @@
-#include <clocale>
-#include <iostream>
-#include <ncurses.h>
-
 #include "display.hpp"
 #include "game.hpp"
 #include "keyboard.hpp"
 #include "position.hpp"
 #include "robot.hpp"
 #include "table.hpp"
+#include <clocale>
 
 auto
 main () -> int

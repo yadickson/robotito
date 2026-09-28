@@ -6,11 +6,11 @@ AM_INIT_AUTOMAKE([gnu foreign subdir-objects])
 
 AC_LANG(C++)
 AC_PROG_CXX
+LT_INIT([static])
 
-AX_CXX_COMPILE_STDCXX_11
+AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
 
-STDCXX_CXXFLAGS="c++11"
-CUSTOM_CXXFLAGS="-std=${STDCXX_CXXFLAGS} -W -Wall -Werror -Wno-pragma-once-outside-header"
+CUSTOM_CXXFLAGS="-W -Wall -Werror -Wno-pragma-once-outside-header"
 
 AC_SUBST([STDCXX_CXXFLAGS])
 AC_SUBST([CUSTOM_CXXFLAGS])
@@ -73,6 +73,7 @@ AC_CHECK_HEADER([iostream])
 AC_CHECK_HEADER([cstdlib])
 AC_CHECK_HEADER([cstddef])
 AC_CHECK_HEADER([cctype])
+AC_CHECK_HEADER([memory])
 
 AM_CONDITIONAL(RUN_TESTS, [test "x$enable_tests" = xyes])
 AM_CONDITIONAL(RUN_COVERAGE, [test "x$enable_coverage" = xyes])

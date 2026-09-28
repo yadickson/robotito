@@ -1,6 +1,6 @@
 #include "position-mock.hpp"
-#include "macros-test.hpp"
 #include "position.hpp"
+#include <CppUTestExt/MockSupport.h>
 
 class PositionMock : public Position
 {

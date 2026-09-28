@@ -1,67 +1,70 @@
-#include "macros-test.hpp"
 #include "position.hpp"
+#include <CppUTest/MemoryLeakDetectorNewMacros.h>
+#include <CppUTest/UtestMacros.h>
+#include <CppUTestExt/MockSupport.h>
+#include <memory>
 
-MACRO_TEST_CLASS (Position)
+#include "faker-cxx.hpp"
+
+TEST_GROUP (Position)
 {
   int xFaker;
   int yFaker;
-  Position *position;
+  std::unique_ptr<FakerCxx> faker;
+  std::unique_ptr<Position> position;
 
-  MACRO_TEST_SETUP ()
+  TEST_SETUP ()
   {
-    xFaker = rand () % 100;
-    yFaker = 200 + rand () % 100;
-    position = new Position (xFaker, yFaker);
+    faker = std::make_unique<FakerCxx> ();
+    xFaker = faker->getNumber (20, 40);
+    yFaker = faker->getNumber (40, 100);
+    position = std::make_unique<Position> (xFaker, yFaker);
   }
 
-  MACRO_TEST_TEARDOWN ()
-  {
-    delete position;
-    MACRO_TEST_CLEAR_MOCK ();
-  }
+  TEST_TEARDOWN () { mock ().clear (); }
 };
 
-MACRO_TEST (Position, should_check_copy_constructor)
+TEST (Position, should_check_copy_constructor)
 {
   const Position copyPosition (*position);
 
-  MACRO_CHECK_EQUAL (xFaker, copyPosition.getX ());
-  MACRO_CHECK_EQUAL (yFaker, copyPosition.getY ());
+  CHECK_EQUAL (xFaker, copyPosition.getX ());
+  CHECK_EQUAL (yFaker, copyPosition.getY ());
 };
 
-MACRO_TEST (Position, should_check_equal_operator)
+TEST (Position, should_check_equal_operator)
 {
   Position copyPosition (0, 0);
 
-  MACRO_CHECK_EQUAL (0, copyPosition.getX ());
-  MACRO_CHECK_EQUAL (0, copyPosition.getY ());
+  CHECK_EQUAL (0, copyPosition.getX ());
+  CHECK_EQUAL (0, copyPosition.getY ());
 
   copyPosition = *position;
 
-  MACRO_CHECK_EQUAL (xFaker, copyPosition.getX ());
-  MACRO_CHECK_EQUAL (yFaker, copyPosition.getY ());
+  CHECK_EQUAL (xFaker, copyPosition.getX ());
+  CHECK_EQUAL (yFaker, copyPosition.getY ());
 };
 
-MACRO_TEST (Position, should_check_position_x)
+TEST (Position, should_check_position_x)
 {
-  MACRO_CHECK_EQUAL (xFaker, position->getX ());
+  CHECK_EQUAL (xFaker, position->getX ());
 };
 
-MACRO_TEST (Position, should_check_position_y)
+TEST (Position, should_check_position_y)
 {
-  MACRO_CHECK_EQUAL (yFaker, position->getY ());
+  CHECK_EQUAL (yFaker, position->getY ());
 };
 
-MACRO_TEST (Position, should_check_position_x_updated)
+TEST (Position, should_check_position_x_updated)
 {
-  xFaker = rand () % 100;
+  xFaker = faker->getNumber (200, 400);
   position->setX (xFaker);
-  MACRO_CHECK_EQUAL (xFaker, position->getX ());
+  CHECK_EQUAL (xFaker, position->getX ());
 };
 
-MACRO_TEST (Position, should_check_position_y_updated)
+TEST (Position, should_check_position_y_updated)
 {
-  yFaker = rand () % 100;
+  yFaker = faker->getNumber (200, 400);
   position->setY (yFaker);
-  MACRO_CHECK_EQUAL (yFaker, position->getY ());
+  CHECK_EQUAL (yFaker, position->getY ());
 };

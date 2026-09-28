@@ -1,38 +1,45 @@
 #include "position-mock.cpp"
+#include "position-mock.hpp"
+#include "position.hpp"
 #include "robot.hpp"
+#include <CppUTest/MemoryLeakDetectorNewMacros.h>
+#include <CppUTest/UtestMacros.h>
+#include <CppUTestExt/MockSupport.h>
 
-MACRO_TEST_CLASS (Robot)
+#include <cstdlib>
+#include <memory>
+
+#include "faker-cxx.hpp"
+
+TEST_GROUP (Robot)
 {
-  Position *positionMock;
-  Robot *robot;
+  std::unique_ptr<FakerCxx> faker;
+  std::unique_ptr<Position> positionMock;
+  std::unique_ptr<Robot> robot;
 
-  MACRO_TEST_SETUP ()
+  TEST_SETUP ()
   {
-    positionMock = new PositionMock ();
-    robot = new Robot (positionMock);
+    faker = std::make_unique<FakerCxx> ();
+    positionMock = std::make_unique<PositionMock> ();
+    robot = std::make_unique<Robot> (positionMock.get ());
   }
 
-  MACRO_TEST_TEARDOWN ()
-  {
-    delete positionMock;
-    delete robot;
-    MACRO_TEST_CLEAR_MOCK ();
-  }
+  TEST_TEARDOWN () { mock ().clear (); }
 };
 
-MACRO_TEST (Robot, should_check_position_mock_move_to_left)
+TEST (Robot, should_check_position_mock_move_to_left)
 {
-  const int xFaker = rand () % 100;
+  const int xFaker = faker->getNumber (10, 40);
   const int expected = xFaker - 1;
 
   mock ()
       .expectOneCall (POSITION_MOCK_GET_X_FUNCTION)
-      .onObject (positionMock)
+      .onObject (positionMock.get ())
       .andReturnValue (xFaker);
 
   mock ()
       .expectOneCall (POSITION_MOCK_SET_X_FUNCTION)
-      .onObject (positionMock)
+      .onObject (positionMock.get ())
       .withIntParameter (POSITION_MOCK_SET_X_FUNCTION_PARAMETER_X, expected);
 
   robot->moveToLeft ();
@@ -40,19 +47,19 @@ MACRO_TEST (Robot, should_check_position_mock_move_to_left)
   mock ().checkExpectations ();
 };
 
-MACRO_TEST (Robot, should_check_position_mock_move_to_right)
+TEST (Robot, should_check_position_mock_move_to_right)
 {
-  const int xFaker = rand () % 100;
+  const int xFaker = faker->getNumber (10, 40);
   const int expected = xFaker + 1;
 
   mock ()
       .expectOneCall (POSITION_MOCK_GET_X_FUNCTION)
-      .onObject (positionMock)
+      .onObject (positionMock.get ())
       .andReturnValue (xFaker);
 
   mock ()
       .expectOneCall (POSITION_MOCK_SET_X_FUNCTION)
-      .onObject (positionMock)
+      .onObject (positionMock.get ())
       .withIntParameter (POSITION_MOCK_SET_X_FUNCTION_PARAMETER_X, expected);
 
   robot->moveToRight ();
@@ -60,19 +67,19 @@ MACRO_TEST (Robot, should_check_position_mock_move_to_right)
   mock ().checkExpectations ();
 };
 
-MACRO_TEST (Robot, should_check_position_mock_move_to_up)
+TEST (Robot, should_check_position_mock_move_to_up)
 {
-  const int yFaker = rand () % 100;
+  const int yFaker = faker->getNumber (10, 40);
   const int expected = yFaker - 1;
 
   mock ()
       .expectOneCall (POSITION_MOCK_GET_Y_FUNCTION)
-      .onObject (positionMock)
+      .onObject (positionMock.get ())
       .andReturnValue (yFaker);
 
   mock ()
       .expectOneCall (POSITION_MOCK_SET_Y_FUNCTION)
-      .onObject (positionMock)
+      .onObject (positionMock.get ())
       .withIntParameter (POSITION_MOCK_SET_Y_FUNCTION_PARAMETER_Y, expected);
 
   robot->moveToUp ();
@@ -80,19 +87,19 @@ MACRO_TEST (Robot, should_check_position_mock_move_to_up)
   mock ().checkExpectations ();
 };
 
-MACRO_TEST (Robot, should_check_position_mock_move_to_down)
+TEST (Robot, should_check_position_mock_move_to_down)
 {
-  const int yFaker = rand () % 100;
+  const int yFaker = faker->getNumber (10, 40);
   const int expected = yFaker + 1;
 
   mock ()
       .expectOneCall (POSITION_MOCK_GET_Y_FUNCTION)
-      .onObject (positionMock)
+      .onObject (positionMock.get ())
       .andReturnValue (yFaker);
 
   mock ()
       .expectOneCall (POSITION_MOCK_SET_Y_FUNCTION)
-      .onObject (positionMock)
+      .onObject (positionMock.get ())
       .withIntParameter (POSITION_MOCK_SET_Y_FUNCTION_PARAMETER_Y, expected);
 
   robot->moveToDown ();
@@ -100,27 +107,27 @@ MACRO_TEST (Robot, should_check_position_mock_move_to_down)
   mock ().checkExpectations ();
 };
 
-MACRO_TEST (Robot, should_check_position)
+TEST (Robot, should_check_position)
 {
   const Position *response = robot->getPosition ();
-  MACRO_CHECK_EQUAL (positionMock, response);
+  CHECK_EQUAL (positionMock.get (), response);
 };
 
-MACRO_TEST (Robot, should_check_copy_robot_constructor)
+TEST (Robot, should_check_copy_robot_constructor)
 {
   const Robot copyRobot (*robot);
 
-  MACRO_CHECK_EQUAL (positionMock, copyRobot.getPosition ());
+  CHECK_EQUAL (positionMock.get (), copyRobot.getPosition ());
 };
 
-MACRO_TEST (Robot, should_check_copy_robot_operator_equeal)
+TEST (Robot, should_check_copy_robot_operator_equeal)
 {
   Position position (0, 0);
   Robot copyRobot (&position);
 
-  MACRO_CHECK_EQUAL (&position, copyRobot.getPosition ());
+  CHECK_EQUAL (&position, copyRobot.getPosition ());
 
   copyRobot = *robot;
 
-  MACRO_CHECK_EQUAL (positionMock, copyRobot.getPosition ());
+  CHECK_EQUAL (positionMock.get (), copyRobot.getPosition ());
 };

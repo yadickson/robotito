@@ -1,10 +1,8 @@
 #include <cstdlib>
-#include <iostream>
+#include <ctime>
 
 #include <CppUTest/CommandLineTestRunner.h>
-#include <CppUTest/TestHarness.h>
 #include <CppUTest/TestRegistry.h>
-#include <CppUTestExt/MockSupport.h>
 #include <CppUTestExt/MockSupportPlugin.h>
 
 auto
@@ -12,8 +10,9 @@ main (int argc, char *argv[]) -> int
 {
   srand ((unsigned)time (nullptr));
 
-  MockSupportPlugin mockSupport;
-  TestRegistry::getCurrentRegistry ()->installPlugin (&mockSupport);
-
-  return CommandLineTestRunner::RunAllTests (argc, argv);
+  MockSupportPlugin mockPlugin;
+  TestRegistry::getCurrentRegistry ()->installPlugin (&mockPlugin);
+  const int response = CommandLineTestRunner::RunAllTests (argc, argv);
+  TestRegistry::getCurrentRegistry ()->resetPlugins ();
+  return response;
 }

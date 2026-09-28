@@ -183,3 +183,11 @@ configure~
 
 .idea/
 *.impl
+
+test_robotito
+test_robotito.*
+*.la
+*.lo
+
+test-driver
+*.trs
