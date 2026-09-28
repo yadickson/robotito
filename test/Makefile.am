@@ -4,14 +4,6 @@ NC := $(shell tput -Txterm sgr0)\\n\\n
 
 EXTRA_DIST = position-mock.hpp
 
-SOURCE_FILES = \
-    $(top_srcdir)/src/position.cpp \
-    $(top_srcdir)/src/robot.cpp  \
-    $(top_srcdir)/src/keyboard.cpp  \
-    $(top_srcdir)/src/game.cpp \
-    $(top_srcdir)/src/table.cpp \
-    $(top_srcdir)/src/display.cpp
-
 TEST_FILES = \
 	$(top_srcdir)/test/faker-cxx.hpp \
 	$(top_srcdir)/test/faker-cxx.cpp \
@@ -43,14 +35,15 @@ endif
 if RUN_TESTS
 
 build-external:
-	$(MAKE) -C $(top_srcdir)/src
+	$(MAKE) -C $(top_builddir)/src
 
 check_PROGRAMS = test_robotito
-test_robotito_SOURCES = $(SOURCE_FILES) $(TEST_FILES)
+test_robotito_SOURCES = $(TEST_FILES)
 test_robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage --coverage -I$(top_srcdir)/src
-test_robotito_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
+test_robotito_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS) $(top_builddir)/src/librobotito.la
 
-test-local: test_robotito
+test-dependencies: | build-external
+test-local: test-dependencies test_robotito
 	@printf "${BLUE}Running tests.${NC}"
 	./test_robotito -c -v -ojunit
 	@printf "$(GREEN)OK${NC}"
@@ -69,5 +62,7 @@ endif
 
 check-local: lint-local
 
+CLEAN_FILES = gcov gcno gcda info xml
+
 clean-local:
-	$(RM) *.gcov *.gcno *.gcda *.info *.xml
+	$(foreach file, $(CLEAN_FILES), $(RM) *.$(file))

@@ -1,4 +1,4 @@
-#include <ncurses.h>
+#include <cstddef>
 
 #include "display.hpp"
 

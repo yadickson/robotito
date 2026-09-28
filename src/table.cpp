@@ -1,6 +1,5 @@
 #include <ncurses.h>
 
-#include "robot.hpp"
 #include "table.hpp"
 
 Table::~Table () = default;
