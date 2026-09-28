@@ -10,15 +10,8 @@ LT_INIT([static])
 
 AC_MSG_NOTICE([Detected Host OS: $host_os])
 
-case "$host_os" in
-    *linux*|*darwin*)
-        AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
-        CUSTOM_CXXFLAGS="-W -Wall -Werror -Wno-pragma-once-outside-header"
-        ;;
-    *)
-        CUSTOM_CXXFLAGS="-std=c++14 -W -Wall -Werror -Wno-pragma-once-outside-header"
-        ;;
-esac
+AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
+CUSTOM_CXXFLAGS="-W -Wall -Werror -Wno-pragma-once-outside-header"
 
 AC_SUBST([STDCXX_CXXFLAGS])
 AC_SUBST([CUSTOM_CXXFLAGS])
