@@ -1,6 +1,10 @@
 #include <ncurses.h>
 
+#include "display.hpp"
 #include "game.hpp"
+#include "keyboard.hpp"
+#include "robot.hpp"
+#include "table.hpp"
 
 #include <array>
 
