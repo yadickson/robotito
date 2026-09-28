@@ -24,6 +24,14 @@ TEST_GROUP (Position)
   TEST_TEARDOWN () { mock ().clear (); }
 };
 
+TEST (Position, should_check_basic_contructor)
+{
+  const Position basicPosition;
+
+  CHECK_EQUAL (0, basicPosition.getX ());
+  CHECK_EQUAL (0, basicPosition.getY ());
+};
+
 TEST (Position, should_check_copy_constructor)
 {
   const Position copyPosition (*position);

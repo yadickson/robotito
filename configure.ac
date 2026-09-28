@@ -10,7 +10,7 @@ LT_INIT([static])
 
 AC_MSG_NOTICE([Detected Host OS: $host_os])
 
-AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
+AX_CXX_COMPILE_STDCXX([17], [noext], [mandatory])
 CUSTOM_CXXFLAGS="-W -Wall -Werror -Wno-pragma-once-outside-header"
 
 AC_SUBST([STDCXX_CXXFLAGS])
