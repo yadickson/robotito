@@ -2,6 +2,7 @@
 #include "position-mock.hpp"
 #include "position.hpp"
 #include "robot.hpp"
+#include <CppUTest/CppUTestConfig.h>
 #include <CppUTest/MemoryLeakDetectorNewMacros.h>
 #include <CppUTest/UtestMacros.h>
 #include <CppUTestExt/MockSupport.h>
@@ -25,6 +26,11 @@ TEST_GROUP (Robot)
   }
 
   TEST_TEARDOWN () { mock ().clear (); }
+};
+
+TEST (Robot, memory_leak_detection_enabled)
+{
+  CHECK_EQUAL (1, CPPUTEST_USE_MEM_LEAK_DETECTION);
 };
 
 TEST (Robot, should_check_position_mock_move_to_left)

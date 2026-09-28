@@ -2,7 +2,9 @@ BLUE := $(shell tput -Txterm setaf 4)\\n
 GREEN := $(shell tput -Txterm setaf 2)\\n
 NC := $(shell tput -Txterm sgr0)\\n\\n
 
-EXTRA_DIST = position-mock.hpp
+EXTRA_DIST = \
+    $(top_srcdir)/test/faker-cxx.hpp \
+    $(top_srcdir)/test/position-mock.hpp
 
 SOURCE_FILES = \
     $(top_srcdir)/src/position.cpp \
@@ -13,7 +15,6 @@ SOURCE_FILES = \
     $(top_srcdir)/src/display.cpp
 
 TEST_FILES = \
-	$(top_srcdir)/test/faker-cxx.hpp \
 	$(top_srcdir)/test/faker-cxx.cpp \
 	$(top_srcdir)/test/test-runner.cpp \
 	$(top_srcdir)/test/position-mock.cpp \
@@ -42,14 +43,13 @@ endif
 
 if RUN_TESTS
 
-build-external:
-	$(MAKE) -C $(top_srcdir)/src
-
 check_PROGRAMS = test_robotito
 test_robotito_SOURCES = $(SOURCE_FILES) $(TEST_FILES)
 test_robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage -I$(top_srcdir)/src
 test_robotito_LDFLAGS = --coverage
 test_robotito_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
+
+TESTS = test_robotito
 
 test-local: test_robotito
 	@printf "${BLUE}Running tests.${NC}"

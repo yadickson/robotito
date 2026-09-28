@@ -1,4 +1,5 @@
 #include "position.hpp"
+#include <CppUTest/CppUTestConfig.h>
 #include <CppUTest/MemoryLeakDetectorNewMacros.h>
 #include <CppUTest/UtestMacros.h>
 #include <CppUTestExt/MockSupport.h>
@@ -22,6 +23,11 @@ TEST_GROUP (Position)
   }
 
   TEST_TEARDOWN () { mock ().clear (); }
+};
+
+TEST (Position, memory_leak_detection_enabled)
+{
+  CHECK_EQUAL (1, CPPUTEST_USE_MEM_LEAK_DETECTION);
 };
 
 TEST (Position, should_check_basic_contructor)
