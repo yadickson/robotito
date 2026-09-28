@@ -47,7 +47,8 @@ build-external:
 
 check_PROGRAMS = test_robotito
 test_robotito_SOURCES = $(SOURCE_FILES) $(TEST_FILES)
-test_robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage --coverage -I$(top_srcdir)/src
+test_robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage -I$(top_srcdir)/src
+test_robotito_LDFLAGS = --coverage
 test_robotito_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
 
 test-local: test_robotito
