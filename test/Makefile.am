@@ -59,7 +59,7 @@ if RUN_COVERAGE
 
 coverage-local: test-local
 	@printf "${BLUE}Running coverage.${NC}"
-	lcov -c -d $(top_srcdir)/src --output-file $(top_srcdir)/lcov.info
+	lcov --directory $(top_srcdir)/src --capture --no-external --output-file $(top_srcdir)/lcov.info
 	genhtml --demangle-cpp -t robotito -o $(top_srcdir)/reports/coverage $(top_srcdir)/lcov.info
 	@printf "$(GREEN)OK${NC}"
 
@@ -70,4 +70,4 @@ endif
 check-local: lint-local
 
 clean-local:
-	$(RM) *.gcov *.gcno *.gcda *.info *.xml
+	$(RM) *.gcov *.gcno *.gcda *.info *.xml *.trs *.log

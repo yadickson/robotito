@@ -8,7 +8,21 @@ AC_LANG(C++)
 AC_PROG_CXX
 LT_INIT([static])
 
-AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
+# Detect the operating system based on host_os
+case "$host_os" in
+    *msys*)
+        AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory])
+        AC_MSG_NOTICE([Detected Host OS: MSYS2])
+        ;;
+    *mingw*)
+        AX_CXX_COMPILE_STDCXX([11], [noext], [mandatory])
+        AC_MSG_NOTICE([Detected Host OS: MSYS2 (MinGW Environment)])
+        ;;
+    *)
+        AX_CXX_COMPILE_STDCXX([14], [noext], [mandatory])
+        AC_MSG_NOTICE([Detected Host OS: $host_os])
+        ;;
+esac
 
 CUSTOM_CXXFLAGS="-W -Wall -Werror -Wno-pragma-once-outside-header"
 
