@@ -15,7 +15,6 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           update: true
-          msystem: UCRT64
           install: git
           pacboy: >-
             autotools:p
