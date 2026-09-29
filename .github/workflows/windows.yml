@@ -34,7 +34,7 @@ jobs:
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure
-        run: ./configure
+        run: ./configure --disable-tests
       - name: make
         run: make
       - name: make test

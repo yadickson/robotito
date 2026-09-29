@@ -2,6 +2,7 @@ AC_PREREQ([2.68])
 AC_INIT([robotito], [0.0.1], [yadickson@gmail.com])
 AC_CANONICAL_HOST
 
+AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([gnu foreign subdir-objects])
 
 AC_LANG(C++)
@@ -13,7 +14,14 @@ AC_MSG_RESULT($host_os)
 
 m4_ifdef([AX_CXX_COMPILE_STDCXX],
 	[ AX_CXX_COMPILE_STDCXX(14, [noext], [mandatory]) ],
-	[ AC_MSG_WARN([AX_CXX_COMPILE_STDCXX macro not found]) ]
+	[
+	    AC_MSG_WARN([AX_CXX_COMPILE_STDCXX macro not found])
+
+	    m4_ifdef([AX_CXX_COMPILE_STDCXX_14],
+        	[ AX_CXX_COMPILE_STDCXX_14 ],
+        	[ AC_MSG_WARN([AX_CXX_COMPILE_STDCXX_14 macro not found]) ]
+        )
+	]
 )
 
 CUSTOM_CXXFLAGS="-W -Wall -Werror -Wno-pragma-once-outside-header"
@@ -53,11 +61,11 @@ AC_MSG_CHECKING([tests])
 AC_ARG_ENABLE([tests],[AS_HELP_STRING([--disable-tests], [Disable tests])], [enable_tests=no], [enable_tests=yes])
 AC_MSG_RESULT($enable_tests)
 
-PKG_CHECK_EXISTS([ncursesw], [], [AC_MSG_ERROR ([ncursesw is required])])
+PKG_CHECK_EXISTS([ncursesw], [], AC_MSG_ERROR [ncursesw is required])
 
 if test "x$enable_tests" = xyes; then
 
-	PKG_CHECK_EXISTS([cpputest], [], [AC_MSG_ERROR ([cpputest is required])])
+	PKG_CHECK_EXISTS([cpputest], [], AC_MSG_ERROR [cpputest is required])
 	PKG_CHECK_MODULES([TEST_DEPENDENCIES_CPPUTEST], [cpputest])
 
 	AC_MSG_CHECKING([coverage])
@@ -68,8 +76,8 @@ if test "x$enable_tests" = xyes; then
 		AC_CHECK_PROGS([LCOV], [lcov], [yes], [])
 		AC_CHECK_PROGS([GENHTML], [genhtml], [yes], [])
 
-		AS_VAR_IF([LCOV], [lcov], [], [AC_MSG_ERROR([lcov is required])])
-		AS_VAR_IF([GENHTML], [genhtml], [], [AC_MSG_ERROR([genhtml is required])])
+		AS_VAR_IF([LCOV], [lcov], [], AC_MSG_ERROR [lcov is required])
+		AS_VAR_IF([GENHTML], [genhtml], [], AC_MSG_ERROR [genhtml is required])
 	fi
 
 fi
