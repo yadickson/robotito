@@ -5,7 +5,7 @@ class FakerCxx
 {
 public:
   virtual ~FakerCxx () = default;
-  [[nodiscard]] auto getNumber (int min, int max) -> int;
+  [[nodiscard]] static auto getNumber (int min, int max) -> int;
 };
 
 #endif

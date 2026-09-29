@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
 
   build:
-    runs-on: macos-latest
+    runs-on: macos-14
 
     steps:
       - name: checkout source code
@@ -23,6 +23,7 @@ jobs:
           brew install lcov
           brew install clang-format
           brew install cppcheck
+          brew install llvm
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure

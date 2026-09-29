@@ -11,14 +11,12 @@ TEST_GROUP (Position)
 {
   int xFaker;
   int yFaker;
-  std::unique_ptr<FakerCxx> faker;
   std::unique_ptr<Position> position;
 
   TEST_SETUP ()
   {
-    faker = std::make_unique<FakerCxx> ();
-    xFaker = faker->getNumber (20, 40);
-    yFaker = faker->getNumber (40, 100);
+    xFaker = FakerCxx::getNumber (20, 40);
+    yFaker = FakerCxx::getNumber (40, 100);
     position = std::make_unique<Position> (xFaker, yFaker);
   }
 
@@ -71,14 +69,14 @@ TEST (Position, should_check_position_y)
 
 TEST (Position, should_check_position_x_updated)
 {
-  xFaker = faker->getNumber (200, 400);
+  xFaker = FakerCxx::getNumber (200, 400);
   position->setX (xFaker);
   CHECK_EQUAL (xFaker, position->getX ());
 };
 
 TEST (Position, should_check_position_y_updated)
 {
-  yFaker = faker->getNumber (200, 400);
+  yFaker = FakerCxx::getNumber (200, 400);
   position->setY (yFaker);
   CHECK_EQUAL (yFaker, position->getY ());
 };

@@ -14,13 +14,11 @@
 
 TEST_GROUP (Robot)
 {
-  std::unique_ptr<FakerCxx> faker;
   std::unique_ptr<Position> positionMock;
   std::unique_ptr<Robot> robot;
 
   TEST_SETUP ()
   {
-    faker = std::make_unique<FakerCxx> ();
     positionMock = std::make_unique<PositionMock> ();
     robot = std::make_unique<Robot> (positionMock.get ());
   }
@@ -35,7 +33,7 @@ TEST (Robot, memory_leak_detection_enabled)
 
 TEST (Robot, should_check_position_mock_move_to_left)
 {
-  const int xFaker = faker->getNumber (10, 40);
+  const int xFaker = FakerCxx::getNumber (10, 40);
   const int expected = xFaker - 1;
 
   mock ()
@@ -55,7 +53,7 @@ TEST (Robot, should_check_position_mock_move_to_left)
 
 TEST (Robot, should_check_position_mock_move_to_right)
 {
-  const int xFaker = faker->getNumber (10, 40);
+  const int xFaker = FakerCxx::getNumber (10, 40);
   const int expected = xFaker + 1;
 
   mock ()
@@ -75,7 +73,7 @@ TEST (Robot, should_check_position_mock_move_to_right)
 
 TEST (Robot, should_check_position_mock_move_to_up)
 {
-  const int yFaker = faker->getNumber (10, 40);
+  const int yFaker = FakerCxx::getNumber (10, 40);
   const int expected = yFaker - 1;
 
   mock ()
@@ -95,7 +93,7 @@ TEST (Robot, should_check_position_mock_move_to_up)
 
 TEST (Robot, should_check_position_mock_move_to_down)
 {
-  const int yFaker = faker->getNumber (10, 40);
+  const int yFaker = FakerCxx::getNumber (10, 40);
   const int expected = yFaker + 1;
 
   mock ()

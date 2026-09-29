@@ -8,9 +8,14 @@ AC_LANG(C++)
 AC_PROG_CXX
 LT_INIT([static])
 
-AC_MSG_NOTICE([Detected Host OS: $host_os])
+AC_MSG_RESULT([Detected Host OS: $host_os])
 
-AX_CXX_COMPILE_STDCXX([17], [noext], [mandatory])
+
+m4_ifdef([AX_CXX_COMPILE_STDCXX],
+  [ AX_CXX_COMPILE_STDCXX(14, [noext], [mandatory]) ],
+  [ AC_MSG_WARN([AX_CXX_COMPILE_STDCXX macro not found]) ]
+)
+
 CUSTOM_CXXFLAGS="-W -Wall -Werror -Wno-pragma-once-outside-header"
 
 AC_SUBST([STDCXX_CXXFLAGS])
@@ -46,7 +51,6 @@ PKG_CHECK_MODULES([DEPENDENCIES], [ncursesw])
 
 AC_MSG_CHECKING([tests enabled])
 AC_ARG_ENABLE([tests],[AS_HELP_STRING([--disable-tests], [Disable tests])], [enable_tests=no], [enable_tests=yes])
-AC_MSG_RESULT($enable_tests)
 
 PKG_CHECK_EXISTS([ncursesw], [], [AC_MSG_ERROR [ncursesw is required]])
 
@@ -57,7 +61,6 @@ if test "x$enable_tests" = xyes; then
 
 	AC_MSG_CHECKING([coverage])
 	AC_ARG_ENABLE([coverage],[AS_HELP_STRING([--disable-coverage], [Disable coverage])], [enable_coverage=no], [enable_coverage=yes])
-	AC_MSG_RESULT($enable_coverage)
 
 	if test "x$enable_coverage" = xyes; then
 		AC_CHECK_PROGS([LCOV], [lcov], [yes], [])
