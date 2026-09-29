@@ -23,7 +23,6 @@ jobs:
           brew install lcov
           brew install clang-format
           brew install cppcheck
-          brew install llvm
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure
