@@ -49,8 +49,9 @@ AS_VAR_IF([CPPCHECK], [cppcheck], [], [AC_MSG_WARN([cppcheck is required to chec
 
 PKG_CHECK_MODULES([DEPENDENCIES], [ncursesw])
 
-AC_MSG_CHECKING([tests enabled])
+AC_MSG_CHECKING([tests])
 AC_ARG_ENABLE([tests],[AS_HELP_STRING([--disable-tests], [Disable tests])], [enable_tests=no], [enable_tests=yes])
+AC_MSG_RESULT($enable_tests)
 
 PKG_CHECK_EXISTS([ncursesw], [], [AC_MSG_ERROR [ncursesw is required]])
 
@@ -61,7 +62,8 @@ if test "x$enable_tests" = xyes; then
 
 	AC_MSG_CHECKING([coverage])
 	AC_ARG_ENABLE([coverage],[AS_HELP_STRING([--disable-coverage], [Disable coverage])], [enable_coverage=no], [enable_coverage=yes])
-
+    AC_MSG_RESULT($enable_coverage)
+s
 	if test "x$enable_coverage" = xyes; then
 		AC_CHECK_PROGS([LCOV], [lcov], [yes], [])
 		AC_CHECK_PROGS([GENHTML], [genhtml], [yes], [])
