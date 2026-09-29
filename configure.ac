@@ -55,7 +55,7 @@ AS_VAR_IF([CFORMAT], [clang-format], [], [AC_MSG_WARN([clang-format is required 
 AS_VAR_IF([CLINT], [clang-tidy], [], [AC_MSG_WARN([clang-tidy is required to check static code])])
 AS_VAR_IF([CPPCHECK], [cppcheck], [], [AC_MSG_WARN([cppcheck is required to check static code])])
 
-PKG_CHECK_MODULES([DEPENDENCIES], [ncursesw])
+PKG_CHECK_MODULES([DEPENDENCIES], [ncurses ncursesw])
 
 AC_MSG_CHECKING([tests])
 AC_ARG_ENABLE([tests],[AS_HELP_STRING([--disable-tests], [Disable tests])], [enable_tests=no], [enable_tests=yes])
