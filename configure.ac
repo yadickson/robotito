@@ -53,11 +53,11 @@ AC_MSG_CHECKING([tests])
 AC_ARG_ENABLE([tests],[AS_HELP_STRING([--disable-tests], [Disable tests])], [enable_tests=no], [enable_tests=yes])
 AC_MSG_RESULT($enable_tests)
 
-PKG_CHECK_EXISTS([ncursesw], [], [AC_MSG_ERROR [ncursesw is required]])
+PKG_CHECK_EXISTS([ncursesw], [], [AC_MSG_ERROR ([ncursesw is required])])
 
 if test "x$enable_tests" = xyes; then
 
-	PKG_CHECK_EXISTS([cpputest], [], [AC_MSG_ERROR [cpputest is required]])
+	PKG_CHECK_EXISTS([cpputest], [], [AC_MSG_ERROR ([cpputest is required])])
 	PKG_CHECK_MODULES([TEST_DEPENDENCIES_CPPUTEST], [cpputest])
 
 	AC_MSG_CHECKING([coverage])
