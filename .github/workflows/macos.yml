@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
 
   build:
-    runs-on: macos-14
+    runs-on: macos-latest
 
     steps:
       - name: checkout source code
@@ -25,7 +25,7 @@ jobs:
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure
-        run: ./configure
+        run: ./configure --disable-coverage
       - name: make
         run: make
       - name: make test
