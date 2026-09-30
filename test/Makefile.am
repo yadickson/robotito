@@ -46,7 +46,7 @@ if RUN_TESTS
 noinst_PROGRAMS = test_robotito
 test_robotito_SOURCES = $(SOURCE_FILES) $(TEST_FILES)
 test_robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage --coverage -I$(top_srcdir)/src
-test_robotito_LDFLAGS = --coverage
+test_robotito_LDFLAGS = --coverage -B,-static -lstdc++ -B,-dynamic
 test_robotito_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
 
 check-local: test-local
