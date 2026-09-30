@@ -52,7 +52,7 @@ test_robotito_CXXFLAGS += -g -O0 -fprofile-arcs -ftest-coverage --coverage
 test_robotito_LDFLAGS = --coverage
 endif
 if IS_WINDOWS
-test_robotito_CXXFLAGS += -Wl,--allow-multiple-definition
+test_robotito_CXXFLAGS += -Wl,--allow-multiple-definition -DCPPUTEST_MEM_LEAK_DETECTION_DISABLED
 endif
 
 check-local: test-local
