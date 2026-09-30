@@ -23,7 +23,7 @@ TEST_FILES = \
 
 format-local: $(EXTRA_DIST) $(TEST_FILES)
 	@printf "$(BLUE)Formating test files.${NC}"
-if RUN_TIDY
+if RUN_LINT
 	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-macro-usage,misc-include-cleaner, -cppcoreguidelines-avoid-magic-numbers, -readability-magic-numbers" --fix $^ -- $(STDCXX_CXXFLAGS) -x c++ -I$(top_srcdir)/src
 endif
 if RUN_FORMAT
@@ -33,7 +33,7 @@ endif
 
 lint-local: $(EXTRA_DIST) $(TEST_FILES)
 	@printf "$(BLUE)Checking static code test files.${NC}"
-if RUN_TIDY
+if RUN_LINT
 	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-macro-usage,misc-include-cleaner, -cppcoreguidelines-avoid-magic-numbers, -readability-magic-numbers" $^ -- $(STDCXX_CXXFLAGS) -x c++ -I$(top_srcdir)/src
 endif
 if RUN_CPPCHECK

@@ -33,7 +33,7 @@ SOURSES = $(EXTRA_DIST) $(SOURCE_FILES)
 
 format-local: $(SOURSES)
 	@printf "${BLUE}Formating src files.${NC}"
-if RUN_TIDY
+if RUN_LINT
 	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,misc-include-cleaner, -cppcoreguidelines-avoid-magic-numbers, -readability-magic-numbers" --fix $^ -- $(STDCXX_CXXFLAGS) -x c++ -I$(top_srcdir)/src
 endif
 if RUN_FORMAT
@@ -43,7 +43,7 @@ endif
 
 lint-local: $(SOURSES)
 	@printf "${BLUE}Checking static code src files.${NC}"
-if RUN_TIDY
+if RUN_LINT
 	clang-tidy --checks="cppcoreguidelines-*,modernize-*,-cppcoreguidelines-special-member-functions,misc-include-cleaner, -cppcoreguidelines-avoid-magic-numbers, -readability-magic-numbers" $^ -- $(STDCXX_CXXFLAGS) -x c++ -I$(top_srcdir)/src
 endif
 if RUN_CPPCHECK

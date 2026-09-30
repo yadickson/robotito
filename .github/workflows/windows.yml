@@ -23,10 +23,7 @@ jobs:
             pkg-config:p
             gcc:p
             make:p
-            lcov:p
             ncurses:p
-            clang:p
-            cppcheck:p
       - name: config git
         run: git config --global core.autocrlf input
       - name: checkout source code
@@ -34,7 +31,7 @@ jobs:
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure
-        run: ./configure --disable-tests
+        run: ./configure
       - name: make
         run: make
       - name: make test
