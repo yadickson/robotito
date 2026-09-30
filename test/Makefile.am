@@ -49,8 +49,6 @@ test_robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFL
 test_robotito_LDFLAGS = --coverage
 test_robotito_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
 
-TESTS = test_robotito
-
 test-local: test_robotito
 	@printf "${BLUE}Running tests.${NC}"
 	./test_robotito -c -v -ojunit
