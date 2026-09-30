@@ -53,7 +53,5 @@ endif
 
 check-local: lint-local
 
-CLEAN_FILES = gcov gcno gcda
-
 clean-local:
-	$(foreach file, $(CLEAN_FILES), $(RM) *.$(file))
+	$(RM) *.gcov *.gcno *.gcda

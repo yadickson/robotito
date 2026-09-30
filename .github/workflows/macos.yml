@@ -20,6 +20,7 @@ jobs:
           brew instal libtool
           brew install pkg-config
           brew install cpputest
+          brew install lcov
       - name: autoreconf
         run: autoreconf -ivf
       - name: configure

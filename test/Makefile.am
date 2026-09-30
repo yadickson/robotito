@@ -45,7 +45,7 @@ if RUN_TESTS
 
 check_PROGRAMS = test_robotito
 test_robotito_SOURCES = $(SOURCE_FILES) $(TEST_FILES)
-test_robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage -I$(top_srcdir)/src
+test_robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage --coverage -I$(top_srcdir)/src
 test_robotito_LDFLAGS = --coverage
 test_robotito_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
 
@@ -60,9 +60,12 @@ if RUN_COVERAGE
 
 coverage-local: test-local
 	@printf "${BLUE}Running coverage.${NC}"
-	lcov --directory $(top_srcdir)/src --capture --no-external --output-file $(top_srcdir)/lcov.info
-	genhtml --demangle-cpp -t robotito -o $(top_srcdir)/reports/coverage $(top_srcdir)/lcov.info
+	$(LCOV) --directory $(top_srcdir)/src --capture --no-external --output-file $(top_srcdir)/lcov.info
+	$(GENHTML) --legend --title "$(PACKAGE_NAME)-$(PACKAGE_VERSION) Code Coverage" --output-directory $(top_srcdir)/reports/coverage $(top_srcdir)/lcov.info
+	@printf "Report generated in ${BLUE}./reports/coverage/index.html${NC}"
 	@printf "$(GREEN)OK${NC}"
+
+check-coverage: coverage-local
 
 endif
 

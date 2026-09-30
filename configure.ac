@@ -72,9 +72,11 @@ if test "x$run_test" = xyes && test "x$enable_tests" = xyes; then
 	AC_MSG_RESULT($enable_coverage)
 
 	if test "x$enable_coverage" = xyes; then
+        AC_CHECK_TOOL([GCOV], [gcov], [no])
 		AC_CHECK_PROGS([LCOV], [lcov], [no])
         AC_CHECK_PROGS([GENHTML], [genhtml], [no])
 
+		AS_VAR_IF([GCOV], [no], [AC_MSG_WARN([gcov is required])], [])
 		AS_VAR_IF([LCOV], [no], [AC_MSG_WARN([lcov is required])], [])
 		AS_VAR_IF([GENHTML], [no], [AC_MSG_WARN([genhtml is required])], [])
 	fi
