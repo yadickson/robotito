@@ -26,8 +26,8 @@ librobotito_la_LIBADD = $(DEPENDENCIES_LIBS)
 
 bin_PROGRAMS = robotito
 robotito_SOURCES = main.cpp
-robotito_CXXFLAGS = $(CUSTOM_CXXFLAGS)
-robotito_LDADD = librobotito.la
+robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(CUSTOM_CXXFLAGS)
+robotito_LDADD = $(DEPENDENCIES_LIBS) librobotito.la
 
 SOURSES = $(EXTRA_DIST) $(SOURCE_FILES)
 
