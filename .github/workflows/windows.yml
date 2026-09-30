@@ -24,8 +24,6 @@ jobs:
             gcc:p
             make:p
             ncurses:p
-            cpputest:p
-            lcov:p
       - name: config git
         run: git config --global core.autocrlf input
       - name: checkout source code
