@@ -12,6 +12,21 @@ LT_INIT([static])
 AC_MSG_CHECKING([Detected Host OS])
 AC_MSG_RESULT($host_os)
 
+case "$host_os" in
+  *mingw* | *cygwin* | *msys*)
+    is_windows=yes
+    ;;
+  *)
+    is_windows=no
+    ;;
+esac
+
+AM_CONDITIONAL([IS_WINDOWS], [test "x$is_windows" = "xyes"])
+
+if test "x$is_windows" = "xyes"; then
+  AC_DEFINE([IS_WINDOWS], [1], [It's Windows])
+fi
+
 m4_ifdef([AX_CXX_COMPILE_STDCXX],
 	[ AX_CXX_COMPILE_STDCXX(14, [noext], [mandatory]) ],
 	[

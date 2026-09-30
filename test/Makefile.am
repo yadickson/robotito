@@ -46,8 +46,14 @@ if RUN_TESTS
 noinst_PROGRAMS = test_robotito
 test_robotito_SOURCES = $(SOURCE_FILES) $(TEST_FILES)
 test_robotito_CXXFLAGS = $(DEPENDENCIES_CFLAGS) $(TEST_DEPENDENCIES_CPPUTEST_CFLAGS) $(CUSTOM_CXXFLAGS) -g -O0 -fprofile-arcs -ftest-coverage --coverage -I$(top_srcdir)/src
-test_robotito_LDFLAGS = --coverage -Wl,--allow-multiple-definition
 test_robotito_LDADD = $(DEPENDENCIES_LIBS) $(TEST_DEPENDENCIES_CPPUTEST_LIBS)
+if RUN_COVERAGE
+test_robotito_CXXFLAGS += -g -O0 -fprofile-arcs -ftest-coverage --coverage
+test_robotito_LDFLAGS = --coverage
+endif
+if IS_WINDOWS
+test_robotito_CXXFLAGS += -Wl,--allow-multiple-definition
+endif
 
 check-local: test-local
 
